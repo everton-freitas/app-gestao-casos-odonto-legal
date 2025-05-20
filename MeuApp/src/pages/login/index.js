@@ -55,17 +55,21 @@ export default function Login() {
 					source={require('../../assets/logo.png')}
 					style={styles.logo}
 				/>
-				<Text style={styles.title}>Entre para iniciar sua sessão</Text>
-				<Picker
-					selectedValue={role}
-					style={styles.input}
-					onValueChange={itemValue => setRole(itemValue)}
-				>
-					<Picker.Item label="Selecione o usuário" value="" />
-					<Picker.Item label="Admin" value="admin" />
-					<Picker.Item label="Perito" value="perito" />
-					<Picker.Item label="Assistente" value="assistente" />
-				</Picker>
+				<Text style={styles.cardText}>
+					Entre para iniciar sua sessão
+				</Text>
+				// No seu componente Login.js
+				<View style={styles.picker}>
+					<Picker
+						selectedValue={role}
+						onValueChange={itemValue => setRole(itemValue)}
+					>
+						<Picker.Item label="Selecione o usuário" value="" />
+						<Picker.Item label="Admin" value="admin" />
+						<Picker.Item label="Perito" value="perito" />
+						<Picker.Item label="Assistente" value="assistente" />
+					</Picker>
+				</View>
 				<TextInput
 					style={styles.input}
 					placeholder="CPF"
