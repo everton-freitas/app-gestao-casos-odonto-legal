@@ -6,8 +6,8 @@ import {
 	Image,
 	TouchableOpacity,
 	Alert,
-	Picker,
 } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
