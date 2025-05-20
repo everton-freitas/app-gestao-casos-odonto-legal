@@ -51,11 +51,7 @@ export default function Login() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.card}>
-				<Image
-					source={require('../../assets/logo.png')}
-					style={styles.logo}
-				/>
-				<Text style={styles.cardText}>
+				<Text style={styles.text}>
 					Entre para iniciar sua sessão
 				</Text>
 				// No seu componente Login.js

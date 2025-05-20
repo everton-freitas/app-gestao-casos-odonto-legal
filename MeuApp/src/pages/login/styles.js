@@ -1,6 +1,17 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../colors';
 
+export const headerStyles = StyleSheet.create({
+  header: {
+    backgroundColor: COLORS.lightBackground,
+  },
+  logo: {
+    width: 32,
+    height: 32,
+    marginLeft: 16,
+  },
+});
+
 export default StyleSheet.create({
 	container: {
 		flex: 1,
@@ -11,25 +22,18 @@ export default StyleSheet.create({
 	},
 	card: {
 		backgroundColor: COLORS.lightBackground,
-		padding: 32, 
+		padding: 32,
 		borderRadius: 10,
 		alignItems: 'center',
-		elevation: 4, 
-		shadowColor: '#000', 
+		elevation: 4,
+		shadowColor: '#000',
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.1,
 		shadowRadius: 10,
-		width: 320, 
+		width: 320,
 	},
-	logo: {
-		width: 160, 
-		height: 160,
-		resizeMode: 'contain',
-		marginBottom: 16,
-	},
-	cardText: {
-		marginVertical: 8, 
-		marginTop: 24, 
+	text: {
+		marginVertical: 8,
 		color: COLORS.text,
 		fontSize: 16,
 		textAlign: 'center',
@@ -38,20 +42,20 @@ export default StyleSheet.create({
 		width: '100%',
 		height: 44,
 		padding: 0,
-		marginVertical: 10, 
+		marginVertical: 10,
 		borderWidth: 1,
 		borderColor: '#ccc',
 		borderRadius: 5,
-		backgroundColor: COLORS.lightBackground, 
+		backgroundColor: COLORS.lightBackground,
 	},
 	input: {
 		width: '100%',
-		padding: 10, 
-		marginVertical: 10, 
+		padding: 10,
+		marginVertical: 10,
 		borderWidth: 1,
 		borderColor: '#ccc',
 		borderRadius: 5,
-		backgroundColor: COLORS.lightBackground, 
+		backgroundColor: COLORS.lightBackground,
 	},
 	button: {
 		width: '100%',
@@ -70,6 +74,6 @@ export default StyleSheet.create({
 	link: {
 		color: COLORS.info,
 		marginTop: 8,
-		textDecorationLine: 'underline',
+		textDecorationLine: 'none',
 	},
 });
