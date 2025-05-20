@@ -6,11 +6,15 @@ import Login from './pages/login';
 const Stack = createStackNavigator();
 
 export default function Routes() {
-    return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Login">
-                <Stack.Screen name="Login" component={Login} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
+	return (
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName="Login">
+				<Stack.Screen
+					name="Login"
+					component={Login}
+					options={{ headerShown: false }}
+				/>
+			</Stack.Navigator>
+		</NavigationContainer>
+	);
 }

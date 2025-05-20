@@ -36,8 +36,8 @@ export default StyleSheet.create({
 	},
 	picker: {
 		width: '100%',
-        height: 44,
-        padding: 0,
+		height: 44,
+		padding: 0,
 		marginVertical: 10, // 0.625rem ≈ 10px (aplica em cima e embaixo)
 		borderWidth: 1,
 		borderColor: '#ccc',
