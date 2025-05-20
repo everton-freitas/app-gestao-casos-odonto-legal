@@ -4,7 +4,6 @@ import {
 	Text,
 	TextInput,
 	Image,
-	StyleSheet,
 	TouchableOpacity,
 	Alert,
 	Picker,
