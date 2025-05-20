@@ -11,25 +11,25 @@ export default StyleSheet.create({
 	},
 	card: {
 		backgroundColor: COLORS.lightBackground,
-		padding: 32, // 2rem ≈ 32px
+		padding: 32, 
 		borderRadius: 10,
 		alignItems: 'center',
-		elevation: 4, // sombra Android
-		shadowColor: '#000', // sombra iOS
+		elevation: 4, 
+		shadowColor: '#000', 
 		shadowOffset: { width: 0, height: 4 },
 		shadowOpacity: 0.1,
 		shadowRadius: 10,
-		width: 320, // 20rem ≈ 320px
+		width: 320, 
 	},
 	logo: {
-		width: 160, // 10rem ≈ 160px
+		width: 160, 
 		height: 160,
 		resizeMode: 'contain',
 		marginBottom: 16,
 	},
 	cardText: {
-		marginVertical: 8, // 0.5rem ≈ 8px
-		marginTop: 24, // 1.5rem ≈ 24px
+		marginVertical: 8, 
+		marginTop: 24, 
 		color: COLORS.text,
 		fontSize: 16,
 		textAlign: 'center',
@@ -38,20 +38,20 @@ export default StyleSheet.create({
 		width: '100%',
 		height: 44,
 		padding: 0,
-		marginVertical: 10, // 0.625rem ≈ 10px (aplica em cima e embaixo)
+		marginVertical: 10, 
 		borderWidth: 1,
 		borderColor: '#ccc',
 		borderRadius: 5,
-		backgroundColor: COLORS.lightBackground, // usando sua variável de cor
+		backgroundColor: COLORS.lightBackground, 
 	},
 	input: {
 		width: '100%',
-		padding: 10, // 0.625rem ≈ 10px
-		marginVertical: 10, // 0.625rem ≈ 10px (aplica em cima e embaixo)
+		padding: 10, 
+		marginVertical: 10, 
 		borderWidth: 1,
 		borderColor: '#ccc',
 		borderRadius: 5,
-		backgroundColor: COLORS.lightBackground, // usando sua variável de cor
+		backgroundColor: COLORS.lightBackground, 
 	},
 	button: {
 		width: '100%',
