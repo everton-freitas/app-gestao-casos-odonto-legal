@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
-import {
-	View,
-	Text,
-	TextInput,
-	Image,
-	TouchableOpacity,
-	Alert,
-} from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import DropDownPicker from 'react-native-dropdown-picker';
+import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
 import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
@@ -15,7 +8,13 @@ import { useNavigation } from '@react-navigation/native';
 const API_URL = 'https://sistema-odonto-legal.onrender.com/api/login';
 
 export default function Login() {
+	const [open, setOpen] = useState(false);
 	const [role, setRole] = useState('');
+	const [items, setItems] = useState([
+		{ label: 'Admin', value: 'admin' },
+		{ label: 'Perito', value: 'perito' },
+		{ label: 'Assistente', value: 'assistente' },
+	]);
 	const [cpf, setCpf] = useState('');
 	const [password, setPassword] = useState('');
 	const navigation = useNavigation();
@@ -26,7 +25,6 @@ export default function Login() {
 			return;
 		}
 
-		// Exibe um alerta simples de carregando (opcional)
 		Alert.alert('Entrando...', 'Verificando credenciais.');
 
 		try {
@@ -39,7 +37,7 @@ export default function Login() {
 			await AsyncStorage.setItem('token', token);
 			await AsyncStorage.setItem('role', role.toUpperCase());
 			Alert.alert('Sucesso!', 'Login bem-sucedido!');
-			navigation.navigate('Inicio'); // Ajuste o nome da tela conforme sua stack
+			navigation.navigate('Inicio');
 		} catch (error) {
 			Alert.alert(
 				'Erro!',
@@ -51,20 +49,19 @@ export default function Login() {
 	return (
 		<View style={styles.container}>
 			<View style={styles.card}>
-				<Text style={styles.text}>
-					Entre para iniciar sua sessão
-				</Text>
-				// No seu componente Login.js
-				<View style={styles.picker}>
-					<Picker
-						selectedValue={role}
-						onValueChange={itemValue => setRole(itemValue)}
-					>
-						<Picker.Item label="Selecione o usuário" value="" />
-						<Picker.Item label="Admin" value="admin" />
-						<Picker.Item label="Perito" value="perito" />
-						<Picker.Item label="Assistente" value="assistente" />
-					</Picker>
+				<Text style={styles.text}>Entre para iniciar sua sessão</Text>
+				<View>
+					<DropDownPicker
+						style={styles.input}
+                        dropDownContainerStyle={styles.dropDownContainer}
+						open={open}
+						value={role}
+						items={items}
+						setOpen={setOpen}
+						setValue={setRole}
+						setItems={setItems}
+						placeholder="Selecione o usuário"
+					/>
 				</View>
 				<TextInput
 					style={styles.input}

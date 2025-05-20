@@ -1,15 +1,16 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../colors';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export const headerStyles = StyleSheet.create({
-  header: {
-    backgroundColor: COLORS.lightBackground,
-  },
-  logo: {
-    width: 32,
-    height: 32,
-    marginLeft: 16,
-  },
+	header: {
+		backgroundColor: COLORS.lightBackground,
+	},
+	logo: {
+		width: 32,
+		height: 32,
+		marginLeft: 16,
+	},
 });
 
 export default StyleSheet.create({
@@ -38,11 +39,7 @@ export default StyleSheet.create({
 		fontSize: 16,
 		textAlign: 'center',
 	},
-	picker: {
-		width: '100%',
-		height: 44,
-		padding: 0,
-		marginVertical: 10,
+	dropDownContainer: {
 		borderWidth: 1,
 		borderColor: '#ccc',
 		borderRadius: 5,
