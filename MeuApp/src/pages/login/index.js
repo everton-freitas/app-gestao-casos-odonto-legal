@@ -82,7 +82,7 @@ export default function Login() {
 					<Text style={styles.buttonText}>Entrar</Text>
 				</TouchableOpacity>
 				<TouchableOpacity
-					onPress={() => navigation.navigate('NovaSenha')}
+					onPress={() => navigation.navigate('NewPassword')}
 				>
 					<Text style={styles.link}>Esqueceu a senha?</Text>
 				</TouchableOpacity>
