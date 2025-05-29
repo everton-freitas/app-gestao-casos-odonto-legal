@@ -53,7 +53,7 @@ export default function Login() {
 				<View>
 					<DropDownPicker
 						style={styles.input}
-                        dropDownContainerStyle={styles.dropDownContainer}
+						dropDownContainerStyle={styles.dropDownContainer}
 						open={open}
 						value={role}
 						items={items}
@@ -61,7 +61,6 @@ export default function Login() {
 						setValue={setRole}
 						setItems={setItems}
 						placeholder="Selecione o usuário"
-						
 					/>
 				</View>
 				<TextInput

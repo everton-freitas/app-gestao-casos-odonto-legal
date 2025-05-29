@@ -20,6 +20,7 @@
     "meuapp": "file:",
     "react": "19.0.0",
     "react-native": "0.79.2",
+    "react-native-alert-notification": "^0.4.2",
     "react-native-dropdown-picker": "^5.4.6",
     "react-native-flash-message": "^0.4.2",
     "react-native-paper": "^5.14.5",
