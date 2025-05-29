@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { View, Text, TextInput, TouchableOpacity, Alert } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import {
+	ALERT_TYPE,
+	Dialog,
+	AlertNotificationRoot,
+	Toast,
+} from 'react-native-alert-notification';
 
 const API_URL = 'https://sistema-odonto-legal.onrender.com/api/login';
 
@@ -21,11 +27,20 @@ export default function Login() {
 
 	async function handleLogin() {
 		if (!role || !cpf || !password) {
-			Alert.alert('Erro!', 'Preencha todos os campos!');
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro!',
+				textBody: 'Preencha todos os campos!',
+				button: 'OK',
+			});
 			return;
 		}
 
-		Alert.alert('Entrando...', 'Verificando credenciais.');
+		Toast.show({
+			type: ALERT_TYPE.INFO,
+			title: 'Entrando...',
+			textBody: 'Verificando credenciais.',
+		});
 
 		try {
 			const response = await axios.post(API_URL, {
@@ -36,56 +51,71 @@ export default function Login() {
 			const token = response.data.token;
 			await AsyncStorage.setItem('token', token);
 			await AsyncStorage.setItem('role', role.toUpperCase());
-			Alert.alert('Sucesso!', 'Login bem-sucedido!');
-			navigation.navigate('Inicio');
+			Dialog.show({
+				type: ALERT_TYPE.SUCCESS,
+				title: 'Sucesso!',
+				textBody: 'Login bem-sucedido!',
+				button: 'OK',
+				onHide: () => navigation.navigate('Inicio'),
+			});
 		} catch (error) {
-			Alert.alert(
-				'Erro!',
-				'Erro ao fazer login. Verifique suas credenciais.'
-			);
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro!',
+				textBody: 'Erro ao fazer login. Verifique suas credenciais.',
+				button: 'OK',
+			});
 		}
 	}
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.card}>
-				<Text style={styles.text}>Entre para iniciar sua sessão</Text>
-				<View>
-					<DropDownPicker
+		<AlertNotificationRoot>
+			<View style={styles.container}>
+				<View style={styles.card}>
+					<Text style={styles.text}>
+						Entre para iniciar sua sessão
+					</Text>
+					<View>
+						<DropDownPicker
+							style={styles.input}
+							dropDownContainerStyle={styles.dropDownContainer}
+							open={open}
+							value={role}
+							items={items}
+							setOpen={setOpen}
+							setValue={setRole}
+							setItems={setItems}
+							placeholder="Selecione o usuário"
+						/>
+					</View>
+					<TextInput
 						style={styles.input}
-						dropDownContainerStyle={styles.dropDownContainer}
-						open={open}
-						value={role}
-						items={items}
-						setOpen={setOpen}
-						setValue={setRole}
-						setItems={setItems}
-						placeholder="Selecione o usuário"
+						placeholder="CPF"
+						value={cpf}
+						onChangeText={setCpf}
+						keyboardType="numeric"
 					/>
+					<TextInput
+						style={styles.input}
+						placeholder="Senha"
+						value={password}
+						onChangeText={setPassword}
+						secureTextEntry
+					/>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={handleLogin}
+					>
+						<Text style={styles.buttonText}>Entrar</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => navigation.navigate('NewPassword')}
+						style={{ marginTop: 0 }}
+					>
+						<Text style={styles.link}>Esqueceu a senha?</Text>
+					</TouchableOpacity>
 				</View>
-				<TextInput
-					style={styles.input}
-					placeholder="CPF"
-					value={cpf}
-					onChangeText={setCpf}
-					keyboardType="numeric"
-				/>
-				<TextInput
-					style={styles.input}
-					placeholder="Senha"
-					value={password}
-					onChangeText={setPassword}
-					secureTextEntry
-				/>
-				<TouchableOpacity style={styles.button} onPress={handleLogin}>
-					<Text style={styles.buttonText}>Entrar</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={() => navigation.navigate('NewPassword')}
-				>
-					<Text style={styles.link}>Esqueceu a senha?</Text>
-				</TouchableOpacity>
 			</View>
-		</View>
+		</AlertNotificationRoot>
 	);
 }
