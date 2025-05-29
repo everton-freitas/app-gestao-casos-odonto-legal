@@ -61,6 +61,7 @@ export default function Login() {
 						setValue={setRole}
 						setItems={setItems}
 						placeholder="Selecione o usuário"
+						
 					/>
 				</View>
 				<TextInput
