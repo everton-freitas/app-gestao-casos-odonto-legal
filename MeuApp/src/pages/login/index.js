@@ -21,6 +21,7 @@ export default function Login() {
 	const navigation = useNavigation();
 
 	async function handleLogin() {
+		console.log('Tentando login...');
 		if (!role || !cpf || !password) {
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
@@ -38,15 +39,14 @@ export default function Login() {
 		});
 
 		try {
+			console.log({ cpf, password, role: role.toUpperCase() });
 			const response = await axios.post(API_URL, {
 				cpf,
 				password,
 				role: role.toUpperCase(),
 			});
+			console.log('Resposta:', response.data);
 			const token = response.data.token;
-			// Se usar AsyncStorage, importe e use aqui
-			// await AsyncStorage.setItem('token', token);
-			// await AsyncStorage.setItem('role', role.toUpperCase());
 			Dialog.show({
 				type: ALERT_TYPE.SUCCESS,
 				title: 'Sucesso!',
@@ -55,6 +55,7 @@ export default function Login() {
 				onHide: () => navigation.navigate('Inicio'),
 			});
 		} catch (error) {
+			console.error('Erro no login', error.response?.data || error);
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
 				title: 'Erro!',

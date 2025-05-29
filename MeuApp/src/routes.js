@@ -3,7 +3,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Image } from 'react-native';
 import Login from './pages/login';
-import NewPassword from './pages/new_password';
 import { headerStyles } from './pages/login/styles';
 import { COLORS } from './colors';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
@@ -31,7 +30,6 @@ export default function Routes() {
 					}}
 				>
 					<Stack.Screen name="Login" component={Login} />
-					<Stack.Screen name="NewPassword" component={NewPassword} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</AlertNotificationRoot>
