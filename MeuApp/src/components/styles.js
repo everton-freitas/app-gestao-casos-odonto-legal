@@ -8,12 +8,12 @@ const styles = StyleSheet.create({
 	},
 	logoTitleContainer: {
 		flexDirection: 'row',
-        alignItems: 'center', 
-        height: 56,           
-        marginTop: 40, 
+		alignItems: 'center',
+		height: 56,
+		marginTop: 40,
 		marginBottom: 5,
 	},
-    logo: {
+	logo: {
 		width: 32,
 		height: 32,
 		marginLeft: 16,
@@ -31,6 +31,33 @@ const styles = StyleSheet.create({
 	arrow: {
 		color: COLORS.primary,
 		marginLeft: 16,
+	},
+	userBox: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		backgroundColor: '#3A5BA0',
+		borderRadius: 20,
+		paddingHorizontal: 12,
+		paddingVertical: 6,
+		position: 'absolute',
+		right: 16,
+		top: 10,
+	},
+	userIcon: {
+		marginRight: 8,
+	},
+	userInfo: {
+		marginRight: 4,
+	},
+	userName: {
+		color: '#fff',
+		fontWeight: 'bold',
+		fontSize: 16,
+	},
+	userRole: {
+		color: '#fff',
+		fontSize: 13,
+		marginTop: -2,
 	},
 });
 

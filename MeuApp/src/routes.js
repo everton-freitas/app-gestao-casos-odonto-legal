@@ -8,6 +8,7 @@ import { AlertNotificationRoot } from 'react-native-alert-notification';
 import Login from './pages/login';
 import NewPassword from './pages/new_password';
 import TabRoutes from './TabRoutes';
+import Profile from './pages/profile';
 
 const Stack = createStackNavigator();
 
@@ -45,6 +46,7 @@ export default function Routes() {
 						component={TabRoutes}
 						options={{ headerShown: false }}
 					/>
+					<Stack.Screen name="Profile" component={Profile} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</AlertNotificationRoot>
