@@ -4,8 +4,6 @@ import {
 	Text,
 	TextInput,
 	TouchableOpacity,
-	Image,
-	StyleSheet,
 	Alert,
 	KeyboardAvoidingView,
 	Platform,
