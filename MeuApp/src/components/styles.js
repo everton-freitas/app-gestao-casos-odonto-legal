@@ -9,8 +9,8 @@ const styles = StyleSheet.create({
 	logoTitleContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		height: 56,
-		marginTop: 40,
+		height: 60,
+		marginTop: 44,
 		marginBottom: 5,
 	},
 	logo: {
@@ -35,13 +35,12 @@ const styles = StyleSheet.create({
 	userBox: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		backgroundColor: '#3A5BA0',
+		backgroundColor: COLORS.icons,
 		borderRadius: 20,
-		paddingHorizontal: 12,
-		paddingVertical: 6,
+		paddingHorizontal: 8,
 		position: 'absolute',
 		right: 16,
-		top: 10,
+		top: 51,
 	},
 	userIcon: {
 		marginRight: 8,
@@ -50,12 +49,12 @@ const styles = StyleSheet.create({
 		marginRight: 4,
 	},
 	userName: {
-		color: '#fff',
+		color: COLORS.white,
 		fontWeight: 'bold',
 		fontSize: 16,
 	},
 	userRole: {
-		color: '#fff',
+		color: COLORS.primary,
 		fontSize: 13,
 		marginTop: -2,
 	},
