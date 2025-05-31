@@ -40,11 +40,10 @@ export default function Routes() {
 				>
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="NewPassword" component={NewPassword} />
-					<Stack.Screen name="Home" component={TabRoutes} />
 					<Stack.Screen
-						name="Casos"
+						name="Home"
 						component={TabRoutes}
-						options={{ title: 'Casos' }} 
+						options={{ headerShown: false }}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>
