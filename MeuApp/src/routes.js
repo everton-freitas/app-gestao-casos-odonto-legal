@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Image } from 'react-native';
 import { headerStyles } from './pages/login/styles';
-import { COLORS } from './colors';
+import { COLORS } from './Colors';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import Login from './pages/login';
 import NewPassword from './pages/new_password';
@@ -15,8 +15,8 @@ export default function Routes() {
 		<AlertNotificationRoot
 			theme={{
 				colors: {
-					primary: '#1E88E5', 
-					success: '#E2B93B', 
+					primary: '#1E88E5',
+					success: '#E2B93B',
 				},
 			}}
 		>
