@@ -13,8 +13,11 @@ export default function TabRoutes() {
         <Tab.Navigator
             screenOptions={({ route }) => ({
                 headerShown: false,
-                tabBarActiveTintColor: '#1E88E5',
-                tabBarInactiveTintColor: '#888',
+                tabBarActiveTintColor: '#EDBF5F',
+                tabBarInactiveTintColor: '#F5F9FC',
+                tabBarStyle: {
+                    backgroundColor: '#012130', 
+                },
                 tabBarIcon: ({ color, size }) => {
                     let iconName;
                     if (route.name === 'Home') iconName = 'home';
