@@ -4,12 +4,14 @@ import { COLORS } from '../Colors';
 const styles = StyleSheet.create({
 	header: {
 		backgroundColor: COLORS.lightBackground,
+		justifyContent: 'center',
 	},
 	logoTitleContainer: {
 		flexDirection: 'row',
-		alignItems: 'flex-end',
-		marginBottom: 10,
-		height: 56,
+        alignItems: 'center', 
+        height: 56,           
+        marginTop: 40, 
+		marginBottom: 5,
 	},
     logo: {
 		width: 32,
@@ -19,16 +21,16 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 20,
 		fontWeight: 'bold',
-		marginLeft: 12,
+		marginLeft: 4,
 		color: COLORS.primary,
 	},
 	backButton: {
 		paddingRight: 8,
 		paddingVertical: 8,
 	},
-	backText: {
-		fontSize: 24,
+	arrow: {
 		color: COLORS.primary,
+		marginLeft: 16,
 	},
 });
 

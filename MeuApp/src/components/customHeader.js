@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'; // ADICIONE ESTA LINHA
 import styles from './styles';
 
 export default function CustomHeader({ title, showLogo }) {
@@ -23,7 +24,7 @@ export default function CustomHeader({ title, showLogo }) {
 						onPress={() => navigation.goBack()}
 						style={styles.backButton}
 					>
-						<Text style={styles.backText}>{'←'}</Text>
+						<Icon name="arrow-left" size={28} style={styles.arrow} />
 					</TouchableOpacity>
 					<Text style={styles.title}>{title}</Text>
 				</View>
