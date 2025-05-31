@@ -7,6 +7,7 @@ import { COLORS } from './Colors';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import Login from './pages/login';
 import NewPassword from './pages/new_password';
+import TabRoutes from './TabRoutes';
 
 const Stack = createStackNavigator();
 

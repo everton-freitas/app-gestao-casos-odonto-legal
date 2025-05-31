@@ -59,7 +59,7 @@ export default function Login() {
 				title: 'Sucesso!',
 				textBody: 'Login bem-sucedido!',
 				button: 'OK',
-				onHide: () => navigation.navigate('Inicio'),
+				onHide: () => navigation.navigate('Home'),
 			});
 		} catch (error) {
 			console.error('Erro no login', error.response?.data || error);
