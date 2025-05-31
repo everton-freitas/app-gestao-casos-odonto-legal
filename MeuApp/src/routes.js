@@ -15,7 +15,7 @@ export default function Routes() {
 			theme={{
 				colors: {
 					primary: '#1E88E5', 
-					success: '#27AE60', 
+					success: '#E2B93B', 
 				},
 			}}
 		>
