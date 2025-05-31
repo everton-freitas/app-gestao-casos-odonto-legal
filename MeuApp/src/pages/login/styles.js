@@ -1,6 +1,5 @@
 import { StyleSheet } from 'react-native';
 import { COLORS } from '../../colors';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 export const headerStyles = StyleSheet.create({
 	header: {

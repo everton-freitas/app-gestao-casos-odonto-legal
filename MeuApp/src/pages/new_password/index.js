@@ -4,13 +4,13 @@ import {
 	Text,
 	TextInput,
 	TouchableOpacity,
-	Alert,
 	KeyboardAvoidingView,
 	Platform,
 } from 'react-native';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
+import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 
 export default function NewPassword() {
 	const navigation = useNavigation();
@@ -20,7 +20,12 @@ export default function NewPassword() {
 
 	async function handleNewPassword() {
 		if (senha !== confirmaSenha) {
-			Alert.alert('Erro', 'As senhas não coincidem!');
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro',
+				textBody: 'As senhas não coincidem!',
+				button: 'OK',
+			});
 			return;
 		}
 
@@ -33,21 +38,24 @@ export default function NewPassword() {
 				}
 			);
 
-			Alert.alert(
-				'Sucesso!',
-				'Nova senha cadastrada com sucesso! Aguarde o seu novo acesso ser aprovado.',
-				[
-					{
-						text: 'OK',
-						onPress: () => navigation.navigate('Login'),
-					},
-				]
-			);
+			Dialog.show({
+				type: ALERT_TYPE.SUCCESS,
+				title: 'Sucesso!',
+				textBody:
+					'Nova senha cadastrada com sucesso! Aguarde o seu novo acesso ser aprovado.',
+				button: 'OK',
+				onHide: () => navigation.navigate('Login'),
+			});
 		} catch (error) {
 			const message =
 				error.response?.data?.message ||
 				'Erro ao cadastrar nova senha.';
-			Alert.alert('Erro', message);
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro',
+				textBody: message,
+				button: 'OK',
+			});
 		}
 	}
 
@@ -58,7 +66,7 @@ export default function NewPassword() {
 		>
 			<View style={styles.container}>
 				<View style={styles.card}>
-					<Text style={styles.login}>Cadastre sua nova senha</Text>
+					<Text style={styles.text}>Cadastre sua nova senha</Text>
 					<TextInput
 						style={styles.input}
 						placeholder="CPF"
