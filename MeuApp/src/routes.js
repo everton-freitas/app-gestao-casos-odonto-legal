@@ -11,7 +11,14 @@ const Stack = createStackNavigator();
 
 export default function Routes() {
 	return (
-		<AlertNotificationRoot>
+		<AlertNotificationRoot
+			theme={{
+				colors: {
+					primary: '#1E88E5', 
+					success: '#27AE60', 
+				},
+			}}
+		>
 			<NavigationContainer>
 				<Stack.Navigator
 					initialRouteName="Login"
