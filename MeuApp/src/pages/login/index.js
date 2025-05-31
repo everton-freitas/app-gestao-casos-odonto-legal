@@ -6,7 +6,7 @@ import {
 	Text,
 	TouchableOpacity,
 	KeyboardAvoidingView,
-	Platform
+	Platform,
 } from 'react-native';
 import styles from './styles';
 import axios from 'axios';
@@ -25,10 +25,10 @@ export default function Login() {
 	]);
 	const [cpf, setCpf] = useState('');
 	const [password, setPassword] = useState('');
+	const [loading, setLoading] = useState(false); // novo estado
 	const navigation = useNavigation();
 
 	async function handleLogin() {
-		console.log('Tentando login...');
 		if (!role || !cpf || !password) {
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
@@ -39,6 +39,7 @@ export default function Login() {
 			return;
 		}
 
+		setLoading(true);
 		Toast.show({
 			type: ALERT_TYPE.INFO,
 			title: 'Entrando...',
@@ -46,13 +47,12 @@ export default function Login() {
 		});
 
 		try {
-			console.log({ cpf, password, role: role.toUpperCase() });
 			const response = await axios.post(API_URL, {
 				cpf,
 				password,
 				role: role.toUpperCase(),
 			});
-			console.log('Resposta:', response.data);
+			Toast.hide(); // esconde o toast ao finalizar
 			const token = response.data.token;
 			Dialog.show({
 				type: ALERT_TYPE.SUCCESS,
@@ -62,13 +62,15 @@ export default function Login() {
 				onHide: () => navigation.navigate('Home'),
 			});
 		} catch (error) {
-			console.error('Erro no login', error.response?.data || error);
+			Toast.hide(); // esconde o toast ao finalizar
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
 				title: 'Erro!',
 				textBody: 'Erro ao fazer login. Verifique suas credenciais.',
 				button: 'OK',
 			});
+		} finally {
+			setLoading(false);
 		}
 	}
 
@@ -93,6 +95,7 @@ export default function Login() {
 							setValue={setRole}
 							setItems={setItems}
 							placeholder="Selecione o usuário"
+							disabled={loading}
 						/>
 					</View>
 					<TextInput
@@ -101,6 +104,7 @@ export default function Login() {
 						value={cpf}
 						onChangeText={setCpf}
 						keyboardType="numeric"
+						editable={!loading}
 					/>
 					<TextInput
 						style={styles.input}
@@ -108,16 +112,19 @@ export default function Login() {
 						value={password}
 						onChangeText={setPassword}
 						secureTextEntry
+						editable={!loading}
 					/>
 					<TouchableOpacity
-						style={styles.button}
+						style={[styles.button, loading && { opacity: 0.6 }]}
 						onPress={handleLogin}
+						disabled={loading}
 					>
 						<Text style={styles.buttonText}>Entrar</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						onPress={() => navigation.navigate('NewPassword')}
 						style={{ marginTop: 0 }}
+						disabled={loading}
 					>
 						<Text style={styles.link}>Esqueceu a senha?</Text>
 					</TouchableOpacity>
