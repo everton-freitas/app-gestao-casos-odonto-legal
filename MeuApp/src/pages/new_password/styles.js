@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../../colors';
 
 const styles = StyleSheet.create({
 	container: {
@@ -6,10 +7,10 @@ const styles = StyleSheet.create({
 		flexDirection: 'column',
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#f5f6fa', 
+		backgroundColor: COLORS.primary, 
 	},
 	card: {
-		backgroundColor: '#fff', 
+		backgroundColor: COLORS.white, 
 		padding: 32,
 		borderRadius: 10,
 		shadowColor: '#000',
@@ -39,18 +40,18 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: '#CCC',
 		borderRadius: 5,
-		backgroundColor: '#fff', 
+		backgroundColor: COLORS.white, 
 	},
 	button: {
 		width: '100%',
-		backgroundColor: '#007bff',
+		backgroundColor: COLORS.primary,
 		paddingVertical: 12,
 		borderRadius: 8,
 		alignItems: 'center',
 		marginTop: 8,
 	},
 	buttonText: {
-		color: '#fff',
+		color: COLORS.white,
 		fontWeight: 'bold',
 		fontSize: 16,
 	},
