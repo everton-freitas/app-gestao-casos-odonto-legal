@@ -43,10 +43,8 @@ const styles = StyleSheet.create({
 		top: 51,
 	},
 	userIcon: {
-		marginRight: 8,
-	},
-	userInfo: {
-		marginRight: 4,
+		fontSize: 28,
+		color: COLORS.white,
 	},
 	userName: {
 		color: COLORS.white,
@@ -54,7 +52,7 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 	},
 	userRole: {
-		color: COLORS.primary,
+		color: COLORS.white,
 		fontSize: 13,
 		marginTop: -2,
 	},
