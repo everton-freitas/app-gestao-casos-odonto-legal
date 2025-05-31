@@ -40,7 +40,12 @@ export default function Routes() {
 				>
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="NewPassword" component={NewPassword} />
-					<Stack.Screen name="Home" component={TabRoutes} options={{ headerShown: false }} />
+					<Stack.Screen name="Home" component={TabRoutes} />
+					<Stack.Screen
+						name="Casos"
+						component={TabRoutes}
+						options={{ title: 'Casos' }} 
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</AlertNotificationRoot>
