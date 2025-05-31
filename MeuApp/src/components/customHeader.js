@@ -81,7 +81,7 @@ export default function CustomHeader({ title, showLogo }) {
 					name="bell-outline"
 					style={styles.userIcon}
 				/>
-				<View style={styles.userInfo}>
+				<View>
 					<Text style={styles.userName}>{user.name}</Text>
 					<Text style={styles.userRole}>{user.role}</Text>
 				</View>
