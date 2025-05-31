@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "MeuApp",
-    "slug": "MeuApp",
+    "name": "Dentalysis",
+    "slug": "Dentalysis",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/logo.png",
@@ -23,7 +23,7 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/logo.png"
+      "favicon": "./src/assets/logo.png"
     },
     "plugins": [
       "expo-font"
