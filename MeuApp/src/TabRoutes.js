@@ -19,7 +19,7 @@ export default function TabRoutes() {
                     let iconName;
                     if (route.name === 'Home') iconName = 'home';
                     else if (route.name === 'Casos') iconName = 'file-document';
-                    else if (route.name === 'Vitimas') iconName = 'account-group';
+                    else if (route.name === 'Vítimas') iconName = 'account-group';
                     else if (route.name === 'Laudos') iconName = 'file-certificate';
                     return <Icon name={iconName} size={size} color={color} />;
                 },
@@ -27,7 +27,7 @@ export default function TabRoutes() {
         >
             <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Casos" component={Casos} />
-            <Tab.Screen name="Vitimas" component={Vitimas} />
+            <Tab.Screen name="Vítimas" component={Vitimas} />
             <Tab.Screen name="Laudos" component={Laudos} />
         </Tab.Navigator>
     );
