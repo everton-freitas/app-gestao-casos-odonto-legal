@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import {
+	View,
+	TextInput,
+	Text,
+	TouchableOpacity,
+	KeyboardAvoidingView,
+	Platform
+} from 'react-native';
 import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
@@ -66,46 +73,56 @@ export default function Login() {
 	}
 
 	return (
-		<View style={styles.container}>
-			<View style={styles.card}>
-				<Text style={styles.text}>Entre para iniciar sua sessão</Text>
-				<View>
-					<DropDownPicker
+		<KeyboardAvoidingView
+			style={{ flex: 1 }}
+			behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+		>
+			<View style={styles.container}>
+				<View style={styles.card}>
+					<Text style={styles.text}>
+						Entre para iniciar sua sessão
+					</Text>
+					<View>
+						<DropDownPicker
+							style={styles.input}
+							dropDownContainerStyle={styles.dropDownContainer}
+							open={open}
+							value={role}
+							items={items}
+							setOpen={setOpen}
+							setValue={setRole}
+							setItems={setItems}
+							placeholder="Selecione o usuário"
+						/>
+					</View>
+					<TextInput
 						style={styles.input}
-						dropDownContainerStyle={styles.dropDownContainer}
-						open={open}
-						value={role}
-						items={items}
-						setOpen={setOpen}
-						setValue={setRole}
-						setItems={setItems}
-						placeholder="Selecione o usuário"
+						placeholder="CPF"
+						value={cpf}
+						onChangeText={setCpf}
+						keyboardType="numeric"
 					/>
+					<TextInput
+						style={styles.input}
+						placeholder="Senha"
+						value={password}
+						onChangeText={setPassword}
+						secureTextEntry
+					/>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={handleLogin}
+					>
+						<Text style={styles.buttonText}>Entrar</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						onPress={() => navigation.navigate('NewPassword')}
+						style={{ marginTop: 0 }}
+					>
+						<Text style={styles.link}>Esqueceu a senha?</Text>
+					</TouchableOpacity>
 				</View>
-				<TextInput
-					style={styles.input}
-					placeholder="CPF"
-					value={cpf}
-					onChangeText={setCpf}
-					keyboardType="numeric"
-				/>
-				<TextInput
-					style={styles.input}
-					placeholder="Senha"
-					value={password}
-					onChangeText={setPassword}
-					secureTextEntry
-				/>
-				<TouchableOpacity style={styles.button} onPress={handleLogin}>
-					<Text style={styles.buttonText}>Entrar</Text>
-				</TouchableOpacity>
-				<TouchableOpacity
-					onPress={() => navigation.navigate('NewPassword')}
-					style={{ marginTop: 0 }}
-				>
-					<Text style={styles.link}>Esqueceu a senha?</Text>
-				</TouchableOpacity>
 			</View>
-		</View>
+		</KeyboardAvoidingView>
 	);
 }
