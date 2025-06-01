@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './styles';
 
 export default function Profile() {
 	const navigation = useNavigation();
@@ -22,17 +23,3 @@ export default function Profile() {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-	button: {
-		backgroundColor: '#1E88E5',
-		padding: 16,
-		borderRadius: 8,
-	},
-	buttonText: {
-		color: '#fff',
-		fontWeight: 'bold',
-		fontSize: 16,
-	},
-});

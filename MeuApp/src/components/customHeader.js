@@ -67,20 +67,13 @@ export default function CustomHeader({ title, showLogo }) {
 						onPress={() => navigation.goBack()}
 						style={styles.backButton}
 					>
-						<Icon
-							name="arrow-left"
-							size={28}
-							style={styles.arrow}
-						/>
+						<Icon name="arrow-left" style={styles.arrow} />
 					</TouchableOpacity>
 					<Text style={styles.title}>{title}</Text>
 				</View>
 			)}
 			<View style={styles.userBox}>
-				<Icon
-					name="bell-outline"
-					style={styles.userIcon}
-				/>
+				<Icon name="bell-outline" style={styles.userIcon} />
 				<View>
 					<Text style={styles.userName}>{user.name}</Text>
 					<Text style={styles.userRole}>{user.role}</Text>
@@ -88,7 +81,7 @@ export default function CustomHeader({ title, showLogo }) {
 				<TouchableOpacity
 					onPress={() => navigation.navigate('Profile')}
 				>
-					<Icon name="chevron-right" style={styles.userIcon}/>
+					<Icon name="chevron-right" style={styles.userIcon} />
 				</TouchableOpacity>
 			</View>
 		</View>

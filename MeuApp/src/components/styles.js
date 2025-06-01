@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 		paddingVertical: 8,
 	},
 	arrow: {
+		fontSize: 28,
 		color: COLORS.primary,
 		marginLeft: 16,
 	},
