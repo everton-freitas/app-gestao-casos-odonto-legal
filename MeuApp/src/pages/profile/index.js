@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import styles from './styles';
 
 export default function Profile() {
@@ -17,8 +18,9 @@ export default function Profile() {
 
 	return (
 		<View style={styles.container}>
-			<TouchableOpacity style={styles.button} onPress={handleLogout}>
-				<Text style={styles.buttonText}>Sair da conta</Text>
+			<TouchableOpacity style={styles.logoutRow} onPress={handleLogout}>
+				<Icon name="logout" style={styles.logoutIcon} />
+				<Text style={styles.logoutText}>Sair da conta</Text>
 			</TouchableOpacity>
 		</View>
 	);
