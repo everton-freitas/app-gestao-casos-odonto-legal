@@ -12,6 +12,7 @@ import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_URL = 'https://sistema-odonto-legal.onrender.com/api/login';
 
@@ -25,7 +26,7 @@ export default function Login() {
 	]);
 	const [cpf, setCpf] = useState('');
 	const [password, setPassword] = useState('');
-	const [loading, setLoading] = useState(false); // novo estado
+	const [loading, setLoading] = useState(false);
 	const navigation = useNavigation();
 
 	async function handleLogin() {
@@ -52,8 +53,9 @@ export default function Login() {
 				password,
 				role: role.toUpperCase(),
 			});
-			Toast.hide(); // esconde o toast ao finalizar
+			Toast.hide();
 			const token = response.data.token;
+			await AsyncStorage.setItem('token', token);
 			Dialog.show({
 				type: ALERT_TYPE.SUCCESS,
 				title: 'Sucesso!',
@@ -62,7 +64,7 @@ export default function Login() {
 				onHide: () => navigation.navigate('Home'),
 			});
 		} catch (error) {
-			Toast.hide(); // esconde o toast ao finalizar
+			Toast.hide();
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
 				title: 'Erro!',

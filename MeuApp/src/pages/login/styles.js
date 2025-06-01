@@ -6,8 +6,8 @@ export const headerStyles = StyleSheet.create({
 		backgroundColor: COLORS.lightBackground,
 	},
 	logo: {
-		width: 32,
-		height: 32,
+		width: 40,
+		height: 40,
 		marginLeft: 16,
 	},
 });

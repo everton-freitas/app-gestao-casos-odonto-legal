@@ -5,6 +5,7 @@ import Casos from './pages/casos';
 import Vitimas from './pages/vitimas';
 import Laudos from './pages/laudos';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CustomHeader from './components/customHeader';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +13,13 @@ export default function TabRoutes() {
 	return (
 		<Tab.Navigator
 			screenOptions={({ route }) => ({
-				headerShown: false,
+				header: () => {
+					if (route.name === 'Início') {
+						return <CustomHeader showLogo />;
+					} else {
+						return <CustomHeader title={route.name} />;
+					}
+				},
 				tabBarActiveTintColor: '#EDBF5F',
 				tabBarInactiveTintColor: '#F5F9FC',
 				tabBarStyle: {

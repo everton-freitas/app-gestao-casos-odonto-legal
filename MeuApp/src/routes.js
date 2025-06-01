@@ -8,6 +8,8 @@ import { AlertNotificationRoot } from 'react-native-alert-notification';
 import Login from './pages/login';
 import NewPassword from './pages/new_password';
 import TabRoutes from './TabRoutes';
+import Profile from './pages/profile';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const Stack = createStackNavigator();
 
@@ -40,11 +42,29 @@ export default function Routes() {
 				>
 					<Stack.Screen name="Login" component={Login} />
 					<Stack.Screen name="NewPassword" component={NewPassword} />
-					<Stack.Screen name="Home" component={TabRoutes} />
 					<Stack.Screen
-						name="Casos"
+						name="Home"
 						component={TabRoutes}
-						options={{ title: 'Casos' }} 
+						options={{ headerShown: false }}
+					/>
+					<Stack.Screen
+						name="Profile"
+						component={Profile}
+						options={({ navigation }) => ({
+							title: 'Sair da conta',
+							headerTintColor: COLORS.primary,
+							headerTitleAlign: 'left',
+							headerTitleStyle: { marginLeft: 4 },
+							headerLeft: () => (
+								<Icon
+									name="arrow-left"
+									size={28}
+									color={COLORS.primary}
+									style={{ marginLeft: 16, paddingRight: 8 }}
+									onPress={() => navigation.goBack()}
+								/>
+							),
+						})}
 					/>
 				</Stack.Navigator>
 			</NavigationContainer>
