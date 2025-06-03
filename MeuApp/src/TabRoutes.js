@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from './pages/home';
 import Casos from './pages/casos';
-import Vitimas from './pages/vitimas';
+import Vitimas from './pages/victims';
 import Laudos from './pages/laudos';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CustomHeader from './components/customHeader';
