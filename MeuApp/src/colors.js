@@ -16,4 +16,5 @@ export const COLORS = {
 	disabledColor: '#A9A9A9',
 	evidence: '#f5f5f5',
 	icons: '#778D9C',
+	iconsLight: '#D3DCE3',
 };

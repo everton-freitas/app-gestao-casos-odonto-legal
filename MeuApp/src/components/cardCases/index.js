@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ScrollView, ActivityIndicator } from 'react-native';
 import { Card, Text, IconButton } from 'react-native-paper';
+import styles from './styles';
 
 export default function CardCases({ cases }) {
 	const [tableCases, setTableCases] = useState(cases || []);
@@ -28,39 +29,66 @@ export default function CardCases({ cases }) {
 						elevation={4}
 					>
 						<Card.Title
-							title={item.title}
-							subtitle={`Protocolo: ${item.protocol}`}
+							title={
+								<Text style={styles.cardTitle}>
+									{item.title}
+								</Text>
+							}
+							subtitle={
+								<Text>
+									<Text style={styles.cardText}>
+										Protocolo:{' '}
+									</Text>
+									{item.protocol}
+								</Text>
+							}
 						/>
 						<Card.Content>
-							<Text>Tipo: {item.caseType}</Text>
 							<Text>
-								Paciente: {item.patient[0]?.nic}
-								{item.patient.length > 1
-									? ' ... (ver mais)'
-									: ''}
+								<Text style={styles.cardText}>Tipo: </Text>
+								<Text style={styles.valor}>
+									{item.caseType}
+								</Text>
 							</Text>
 							<Text>
-								Status:{' '}
+								<Text style={styles.cardText}>Paciente: </Text>
+								<Text style={styles.valor}>
+									{item.patient[0]?.nic}
+									{item.patient.length > 1
+										? ' ... (ver mais)'
+										: ''}
+								</Text>
+							</Text>
+							<Text>
+								<Text style={styles.cardText}>Status: </Text>
 								<Text
-									style={
+									style={[
+										styles.valor,
 										item.status === 'ABERTO'
 											? styles.statusAberto
 											: item.status === 'FINALIZADO'
 												? styles.statusFinalizado
-												: styles.statusArquivado
-									}
+												: styles.statusArquivado,
+									]}
 								>
 									{item.status}
 								</Text>
 							</Text>
 							<Text>
-								Data:{' '}
-								{new Date(item.openedAt).toLocaleDateString(
-									'pt-BR'
-								)}
+								<Text style={styles.cardText}>Data: </Text>
+								<Text style={styles.valor}>
+									{new Date(item.openedAt).toLocaleDateString(
+										'pt-BR'
+									)}
+								</Text>
 							</Text>
 							<Text>
-								Evidências: {item.evidence?.length || 0}
+								<Text style={styles.cardText}>
+									Evidências:{' '}
+								</Text>
+								<Text style={styles.valor}>
+									{item.evidence?.length || 0}
+								</Text>
 							</Text>
 						</Card.Content>
 						<Card.Actions>
@@ -68,16 +96,22 @@ export default function CardCases({ cases }) {
 								icon="eye-outline"
 								onPress={() => verDetalhes(item.protocol)}
 								accessibilityLabel="Ver detalhes"
+								iconColor={styles.icon.color}
+								containerColor={styles.icon.backgroundColor} 
 							/>
 							<IconButton
 								icon="pencil-outline"
 								onPress={() => fetchCaseDetails(item.protocol)}
 								accessibilityLabel="Editar"
+								iconColor={styles.icon.color}
+								containerColor={styles.icon.backgroundColor}
 							/>
 							<IconButton
 								icon="plus-circle-outline"
 								onPress={() => addEvidence(item.protocol)}
 								accessibilityLabel="Adicionar evidência"
+								iconColor={styles.icon.color}
+								containerColor={styles.icon.backgroundColor}
 							/>
 							{(!item.evidence || item.evidence.length === 0) && (
 								<IconButton
@@ -85,6 +119,7 @@ export default function CardCases({ cases }) {
 									onPress={() => excluirCaso(item.protocol)}
 									accessibilityLabel="Excluir"
 									iconColor="#EB5757"
+									containerColor={styles.icon.backgroundColor}
 								/>
 							)}
 						</Card.Actions>
@@ -94,24 +129,3 @@ export default function CardCases({ cases }) {
 		</ScrollView>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		padding: 16,
-	},
-	card: {
-		marginBottom: 16,
-	},
-	statusAberto: {
-		color: '#1E88E5',
-		fontWeight: 'bold',
-	},
-	statusFinalizado: {
-		color: '#43A047',
-		fontWeight: 'bold',
-	},
-	statusArquivado: {
-		color: '#757575',
-		fontWeight: 'bold',
-	},
-});
