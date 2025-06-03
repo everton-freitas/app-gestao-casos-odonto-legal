@@ -6,13 +6,13 @@ import {
 	Text,
 	TouchableOpacity,
 	KeyboardAvoidingView,
-	Platform
+	Platform,
 } from 'react-native';
 import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const API_URL = 'https://sistema-odonto-legal.onrender.com/api/login';
 
@@ -56,6 +56,7 @@ export default function Login() {
 			console.log('Resposta:', response.data);
 			const token = response.data.token;
 			await AsyncStorage.setItem('token', token);
+			await AsyncStorage.setItem('role', role.toUpperCase());
 			Dialog.show({
 				type: ALERT_TYPE.SUCCESS,
 				title: 'Sucesso!',
@@ -73,8 +74,6 @@ export default function Login() {
 			});
 		}
 	}
-
-	
 
 	return (
 		<KeyboardAvoidingView
