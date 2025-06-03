@@ -5,7 +5,7 @@ import Casos from './pages/casos';
 import Vitimas from './pages/victims';
 import Laudos from './pages/laudos';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import CustomHeader from './components/customHeader';
+import CustomHeader from './components/header/index';
 
 const Tab = createBottomTabNavigator();
 
