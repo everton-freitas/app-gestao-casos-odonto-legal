@@ -55,7 +55,7 @@ export default function CustomHeader({ title, showLogo }) {
 			{showLogo ? (
 				<View style={styles.logoTitleContainer}>
 					<Image
-						source={require('../assets/logo.png')}
+						source={require('../../assets/logo.png')}
 						style={styles.logo}
 						resizeMode="contain"
 					/>
