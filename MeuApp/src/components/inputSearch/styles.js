@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../../Colors';
 
 const styles = StyleSheet.create({
   searchContainer: {
@@ -10,7 +11,7 @@ const styles = StyleSheet.create({
     width: '90%',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: '#808080',
+    borderColor: COLORS.disabledColor,
     height: 40,
     paddingVertical: 3,
     paddingHorizontal: 10,
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
   },
   secondary: {
     padding: 10,
-    borderColor: '#ccc',
+    borderColor: COLORS.disabledBackground,
     backgroundColor: COLORS.lightBackground,
   },
 });
