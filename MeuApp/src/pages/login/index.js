@@ -6,13 +6,13 @@ import {
 	Text,
 	TouchableOpacity,
 	KeyboardAvoidingView,
-	Platform,
+	Platform
 } from 'react-native';
 import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'; 
 
 const API_URL = 'https://sistema-odonto-legal.onrender.com/api/login';
 
@@ -26,10 +26,10 @@ export default function Login() {
 	]);
 	const [cpf, setCpf] = useState('');
 	const [password, setPassword] = useState('');
-	const [loading, setLoading] = useState(false);
 	const navigation = useNavigation();
 
 	async function handleLogin() {
+		console.log('Tentando login...');
 		if (!role || !cpf || !password) {
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
@@ -40,7 +40,6 @@ export default function Login() {
 			return;
 		}
 
-		setLoading(true);
 		Toast.show({
 			type: ALERT_TYPE.INFO,
 			title: 'Entrando...',
@@ -48,12 +47,13 @@ export default function Login() {
 		});
 
 		try {
+			console.log({ cpf, password, role: role.toUpperCase() });
 			const response = await axios.post(API_URL, {
 				cpf,
 				password,
 				role: role.toUpperCase(),
 			});
-			Toast.hide();
+			console.log('Resposta:', response.data);
 			const token = response.data.token;
 			await AsyncStorage.setItem('token', token);
 			Dialog.show({
@@ -64,17 +64,17 @@ export default function Login() {
 				onHide: () => navigation.navigate('Home'),
 			});
 		} catch (error) {
-			Toast.hide();
+			console.error('Erro no login', error.response?.data || error);
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
 				title: 'Erro!',
 				textBody: 'Erro ao fazer login. Verifique suas credenciais.',
 				button: 'OK',
 			});
-		} finally {
-			setLoading(false);
 		}
 	}
+
+	
 
 	return (
 		<KeyboardAvoidingView
@@ -97,7 +97,6 @@ export default function Login() {
 							setValue={setRole}
 							setItems={setItems}
 							placeholder="Selecione o usuário"
-							disabled={loading}
 						/>
 					</View>
 					<TextInput
@@ -106,7 +105,6 @@ export default function Login() {
 						value={cpf}
 						onChangeText={setCpf}
 						keyboardType="numeric"
-						editable={!loading}
 					/>
 					<TextInput
 						style={styles.input}
@@ -114,19 +112,16 @@ export default function Login() {
 						value={password}
 						onChangeText={setPassword}
 						secureTextEntry
-						editable={!loading}
 					/>
 					<TouchableOpacity
-						style={[styles.button, loading && { opacity: 0.6 }]}
+						style={styles.button}
 						onPress={handleLogin}
-						disabled={loading}
 					>
 						<Text style={styles.buttonText}>Entrar</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						onPress={() => navigation.navigate('NewPassword')}
 						style={{ marginTop: 0 }}
-						disabled={loading}
 					>
 						<Text style={styles.link}>Esqueceu a senha?</Text>
 					</TouchableOpacity>
