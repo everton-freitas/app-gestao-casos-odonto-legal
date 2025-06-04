@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, TextInput, StyleSheet } from 'react-native';
+import { View, TextInput } from 'react-native';
 import { COLORS } from '../../Colors';
+import styles from './styles';
 
 const InputSearch = ({
   placeholder,
