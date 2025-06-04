@@ -166,15 +166,25 @@ export default function Casos() {
 			</View>
 			<CardCases cases={paginatedCases} />
 			<View style={styles.pagination}>
-				{Array.from({ length: lengthPag }).map((_, i) => (
-					<TouchableOpacity
-						key={i}
-						style={[styles.pag, page === i + 1 && styles.pagActive]}
-						onPress={() => setPage(i + 1)}
-					>
-						<Text style={styles.pagText}>{i + 1}</Text>
-					</TouchableOpacity>
-				))}
+				{Array.from({ length: lengthPag }).map((_, i) => {
+					const isActive = page === i + 1;
+					return (
+						<TouchableOpacity
+							key={i}
+							style={[styles.pag, isActive && styles.pagActive]}
+							onPress={() => setPage(i + 1)}
+						>
+							<Text
+								style={[
+									styles.pagText,
+									isActive && { color: COLORS.white },
+								]}
+							>
+								{i + 1}
+							</Text>
+						</TouchableOpacity>
+					);
+				})}
 			</View>
 		</ScrollView>
 	);
