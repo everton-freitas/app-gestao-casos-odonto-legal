@@ -10,6 +10,7 @@ import NewPassword from './pages/new_password';
 import TabRoutes from './TabRoutes';
 import Profile from './pages/profile';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import CaseDetails from './pages/case_details';
 
 const Stack = createStackNavigator();
 
@@ -52,6 +53,25 @@ export default function Routes() {
 						component={Profile}
 						options={({ navigation }) => ({
 							title: 'Sair da conta',
+							headerTintColor: COLORS.primary,
+							headerTitleAlign: 'left',
+							headerTitleStyle: { marginLeft: 4 },
+							headerLeft: () => (
+								<Icon
+									name="arrow-left"
+									size={28}
+									color={COLORS.primary}
+									style={{ marginLeft: 16, paddingRight: 8 }}
+									onPress={() => navigation.goBack()}
+								/>
+							),
+						})}
+					/>
+					<Stack.Screen
+						name="CaseDetails"
+						component={CaseDetails}
+						options={({ navigation }) => ({
+							title: 'Detalhes do Caso',
 							headerTintColor: COLORS.primary,
 							headerTitleAlign: 'left',
 							headerTitleStyle: { marginLeft: 4 },
