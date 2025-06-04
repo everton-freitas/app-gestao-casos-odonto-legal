@@ -11,8 +11,8 @@ import {
 import styles from './styles';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
-import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { showNotification } from '../../components/notification';
 
 const API_URL = 'https://sistema-odonto-legal.onrender.com/api/login';
 
@@ -30,20 +30,21 @@ export default function Login() {
 
 	async function handleLogin() {
 		console.log('Tentando login...');
+
 		if (!role || !cpf || !password) {
-			Dialog.show({
-				type: ALERT_TYPE.DANGER,
+			showNotification({
+				type: 'DANGER',
 				title: 'Erro!',
-				textBody: 'Preencha todos os campos!',
-				button: 'OK',
+				message: 'Preencha todos os campos!',
+				dialog: true,
 			});
 			return;
 		}
 
-		Toast.show({
-			type: ALERT_TYPE.INFO,
+		showNotification({
+			type: 'INFO',
 			title: 'Entrando...',
-			textBody: 'Verificando credenciais.',
+			message: 'Verificando credenciais.',
 		});
 
 		try {
@@ -57,20 +58,21 @@ export default function Login() {
 			const token = response.data.token;
 			await AsyncStorage.setItem('token', token);
 			await AsyncStorage.setItem('role', role.toUpperCase());
-			Dialog.show({
-				type: ALERT_TYPE.SUCCESS,
+
+			showNotification({
+				type: 'SUCCESS',
 				title: 'Sucesso!',
-				textBody: 'Login bem-sucedido!',
-				button: 'OK',
+				message: 'Login bem-sucedido!',
+				dialog: true,
 				onHide: () => navigation.navigate('Home'),
 			});
 		} catch (error) {
 			console.error('Erro no login', error.response?.data || error);
-			Dialog.show({
-				type: ALERT_TYPE.DANGER,
+			showNotification({
+				type: 'DANGER',
 				title: 'Erro!',
-				textBody: 'Erro ao fazer login. Verifique suas credenciais.',
-				button: 'OK',
+				message: 'Erro ao fazer login. Verifique suas credenciais.',
+				dialog: true,
 			});
 		}
 	}

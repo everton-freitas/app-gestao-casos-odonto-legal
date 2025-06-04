@@ -1,15 +1,20 @@
 import React from 'react';
+import { Platform, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Image } from 'react-native';
 import { headerStyles } from './pages/login/styles';
 import { COLORS } from './Colors';
-import { AlertNotificationRoot } from 'react-native-alert-notification';
 import Login from './pages/login';
 import NewPassword from './pages/new_password';
 import TabRoutes from './TabRoutes';
 import Profile from './pages/profile';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// Somente importa se não estiver na web
+const AlertNotificationRoot =
+	Platform.OS !== 'web'
+		? require('react-native-alert-notification').AlertNotificationRoot
+		: ({ children }) => <>{children}</>;
 
 const Stack = createStackNavigator();
 
