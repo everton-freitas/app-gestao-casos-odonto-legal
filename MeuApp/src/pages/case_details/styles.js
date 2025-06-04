@@ -4,7 +4,6 @@ import { COLORS } from '../../Colors';
 const styles = StyleSheet.create({
   container: {
     padding: 16,
-    backgroundColor: COLORS.lightBackground,
     minHeight: '100%',
   },
   centered: {

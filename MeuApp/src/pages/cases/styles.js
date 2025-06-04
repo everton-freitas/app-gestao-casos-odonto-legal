@@ -24,8 +24,12 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		alignItems: 'center',
 	},
-	buttonText: {
+	buttonText1: {
 		color: COLORS.white,
+		fontWeight: 'bold',
+	},
+	buttonText2: {
+		color: COLORS.black,
 		fontWeight: 'bold',
 	},
 	inputArea: {

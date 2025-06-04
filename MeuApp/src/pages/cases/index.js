@@ -135,13 +135,13 @@ export default function Casos() {
 							/* navegação para cadastro */
 						}}
 					>
-						<Text style={styles.buttonText}>Cadastrar caso</Text>
+						<Text style={styles.buttonText1}>Cadastrar caso</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={styles.buttonSecondary}
 						onPress={clearFilters}
 					>
-						<Text style={styles.buttonText}>Limpar filtros</Text>
+						<Text style={styles.buttonText2}>Limpar filtros</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
