@@ -1,6 +1,7 @@
-import React from 'react';
-import { View, TextInput } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, Platform, Button } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import styles from './styles';
 
 const Filters = ({
@@ -11,6 +12,17 @@ const Filters = ({
 	setPage,
 	applyFilterDate,
 }) => {
+	const [showPicker, setShowPicker] = useState(false);
+
+	const onChange = (event, selectedDate) => {
+		setShowPicker(false);
+		if (selectedDate) {
+			const dateStr = selectedDate.toISOString().split('T')[0];
+			setDateFilter(dateStr);
+			setPage(1);
+		}
+	};
+
 	return (
 		<View style={styles.filterArea}>
 			<View style={styles.pickerWrapper}>
@@ -29,17 +41,23 @@ const Filters = ({
 					<Picker.Item label="Arquivado" value="ARQUIVADO" />
 				</Picker>
 			</View>
-			<TextInput
-				style={styles.inputDate}
-				value={dateFilter}
-				placeholder="Data (YYYY-MM-DD)"
-				onChangeText={text => {
-					setDateFilter(text);
-					setPage(1);
-				}}
-				onSubmitEditing={applyFilterDate}
-				keyboardType="numeric"
-			/>
+			<View style={styles.inputDate}>
+				<TextInput
+					value={dateFilter}
+					style={styles.filter}
+					placeholder="Data (YYYY-MM-DD)"
+					onFocus={() => setShowPicker(true)}
+					showSoftInputOnFocus={false}
+				/>
+				{showPicker && (
+					<DateTimePicker
+						value={dateFilter ? new Date(dateFilter) : new Date()}
+						mode="date"
+						display={Platform.OS === 'ios' ? 'spinner' : 'default'}
+						onChange={onChange}
+					/>
+				)}
+			</View>
 		</View>
 	);
 };
