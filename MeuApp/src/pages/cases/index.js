@@ -5,6 +5,7 @@ import InputSearch from '../../components/inputSearch';
 import Filters from '../../components/filters';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { COLORS } from '../../Colors';
 
