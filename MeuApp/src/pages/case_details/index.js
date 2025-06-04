@@ -35,6 +35,13 @@ export default function CaseDetails() {
 		navigation.navigate('AddEvidence', { protocol });
 	};
 
+	const handleGenerateReport = () => {
+		// Troque para a navegação correta do seu app
+		navigation.navigate('GenerateReport', {
+			protocol: caseDetails.protocol,
+		});
+	};
+
 	useEffect(() => {
 		const fetchCaseDetails = async () => {
 			setLoading(true);
@@ -294,98 +301,116 @@ export default function CaseDetails() {
 						<View style={styles.cardSection}>
 							<Text style={styles.sectionTitle}>Evidências</Text>
 							{caseDetails.evidence?.length > 0 ? (
-								caseDetails.evidence.map((evid, idx) => (
-									<View
-										key={evid._id || idx}
-										style={styles.card}
-									>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Título:
-											</Text>{' '}
-											{getOrNA(evid.title)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Depoimento:
-											</Text>{' '}
-											{getOrNA(evid.testimony)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Descrição Técnica:
-											</Text>{' '}
-											{getOrNA(evid.descriptionTechnical)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Condição:
-											</Text>{' '}
-											{getOrNA(evid.condition)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Coletor:
-											</Text>{' '}
-											{getOrNA(evid.collector?.name)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Categoria:
-											</Text>{' '}
-											{getOrNA(evid.category)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Observações:
-											</Text>{' '}
-											{getOrNA(evid.obs)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Latitude:
-											</Text>{' '}
-											{getOrNA(evid.latitude)}
-										</Text>
-										<Text style={styles.info}>
-											<Text style={styles.label}>
-												Longitude:
-											</Text>{' '}
-											{getOrNA(evid.longitude)}
-										</Text>
-										{evid.photo ? (
-											<View style={styles.imageWrapper}>
-												<Text style={styles.label}>
-													Foto:
-												</Text>
-												<Image
-													source={{ uri: evid.photo }}
-													style={styles.imagePreview}
-													resizeMode="cover"
-												/>
-											</View>
-										) : (
+								<>
+									{caseDetails.evidence.map((evid, idx) => (
+										<View
+											key={evid._id || idx}
+											style={styles.card}
+										>
 											<Text style={styles.info}>
 												<Text style={styles.label}>
-													Foto:
+													Título:
 												</Text>{' '}
-												Não disponível
+												{getOrNA(evid.title)}
 											</Text>
-										)}
-									</View>
-								))
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Depoimento:
+												</Text>{' '}
+												{getOrNA(evid.testimony)}
+											</Text>
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Descrição Técnica:
+												</Text>{' '}
+												{getOrNA(
+													evid.descriptionTechnical
+												)}
+											</Text>
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Condição:
+												</Text>{' '}
+												{getOrNA(evid.condition)}
+											</Text>
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Coletor:
+												</Text>{' '}
+												{getOrNA(evid.collector?.name)}
+											</Text>
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Categoria:
+												</Text>{' '}
+												{getOrNA(evid.category)}
+											</Text>
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Observações:
+												</Text>{' '}
+												{getOrNA(evid.obs)}
+											</Text>
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Latitude:
+												</Text>{' '}
+												{getOrNA(evid.latitude)}
+											</Text>
+											<Text style={styles.info}>
+												<Text style={styles.label}>
+													Longitude:
+												</Text>{' '}
+												{getOrNA(evid.longitude)}
+											</Text>
+											{evid.photo ? (
+												<View
+													style={styles.imageWrapper}
+												>
+													<Text style={styles.label}>
+														Foto:
+													</Text>
+													<Image
+														source={{
+															uri: evid.photo,
+														}}
+														style={
+															styles.imagePreview
+														}
+														resizeMode="cover"
+													/>
+												</View>
+											) : (
+												<Text style={styles.info}>
+													<Text style={styles.label}>
+														Foto:
+													</Text>{' '}
+													Não disponível
+												</Text>
+											)}
+											<TouchableOpacity
+												style={styles.buttonLaudo}
+												onPress={handleGenerateReport}
+											>
+												<Text style={styles.buttonText1}>
+													Gerar laudo
+												</Text>
+											</TouchableOpacity>
+										</View>
+									))}
+								</>
 							) : (
 								<Text style={styles.info}>
 									Nenhuma evidência registrada.
 								</Text>
 							)}
 							<TouchableOpacity
-								style={styles.button}
+								style={styles.buttonEvidencia}
 								onPress={() =>
 									addEvidence(caseDetails.protocol)
 								}
 							>
-								<Text style={styles.buttonText}>
+								<Text style={styles.buttonText2}>
 									Adicionar evidências
 								</Text>
 							</TouchableOpacity>
