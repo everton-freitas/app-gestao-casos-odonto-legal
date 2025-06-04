@@ -125,9 +125,7 @@ export default function Casos() {
 	if (loading) return null;
 
 	return (
-		<ScrollView
-			style={{ flex: 1, backgroundColor: COLORS.lightBackground }}
-		>
+		<ScrollView>
 			<View style={styles.headerArea}>
 				<View style={styles.buttons}>
 					<TouchableOpacity

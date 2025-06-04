@@ -32,7 +32,6 @@ export default StyleSheet.create({
 		borderRadius: 8,
 		marginRight: 10,
 		alignItems: 'center',
-
 	},
 	buttonSecondary: {
 		flex: 1,

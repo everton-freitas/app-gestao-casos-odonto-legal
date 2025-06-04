@@ -4,12 +4,10 @@ import { COLORS } from '../../Colors';
 const styles = StyleSheet.create({
 	headerArea: {
 		padding: 16,
-		backgroundColor: COLORS.lightBackground,
 	},
 	buttons: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: 15,
 	},
 	button: {
 		flex: 1,
@@ -31,12 +29,8 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	inputArea: {
-		flexDirection: 'row',
 		justifyContent: 'space-between',
-		alignItems: 'center',
-		paddingHorizontal: 16,
-		marginBottom: 16,
-		gap: 8,
+		marginBottom: 2,
 	},
 	pagination: {
 		flexDirection: 'row',

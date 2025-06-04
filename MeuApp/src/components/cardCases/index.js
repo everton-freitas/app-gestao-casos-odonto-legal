@@ -97,7 +97,7 @@ export default function CardCases({ cases }) {
 								onPress={() => verDetalhes(item.protocol)}
 								accessibilityLabel="Ver detalhes"
 								iconColor={styles.icon.color}
-								containerColor={styles.icon.backgroundColor} 
+								containerColor={styles.icon.backgroundColor}
 							/>
 							<IconButton
 								icon="pencil-outline"
