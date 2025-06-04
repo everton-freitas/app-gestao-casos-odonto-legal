@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import {
-	View,
-	Text,
-	Button,
-	ScrollView,
-	TouchableOpacity,
-	StyleSheet,
-} from 'react-native';
+import { View, Text, Button, ScrollView, TouchableOpacity } from 'react-native';
 import CardCases from '../../components/cardCases';
-import InputSearch from '../../components/InputSearch';
+import InputSearch from '../../components/inputSearch';
 import Filters from '../../components/filters';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import styles from './styles';
 import { COLORS } from '../../Colors';
 
 export default function Casos() {
@@ -135,20 +129,21 @@ export default function Casos() {
 			style={{ flex: 1, backgroundColor: COLORS.lightBackground }}
 		>
 			<View style={styles.headerArea}>
-				<Text style={styles.title}>Casos Periciais</Text>
 				<View style={styles.buttons}>
-					<Button
-						title="Adicionar caso"
-						color={COLORS.secondary}
+					<TouchableOpacity
+						style={styles.button}
 						onPress={() => {
 							/* navegação para cadastro */
 						}}
-					/>
-					<Button
-						title="Limpar filtros"
-						color={COLORS.secondary}
+					>
+						<Text style={styles.buttonText}>Cadastrar caso</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={styles.buttonSecondary}
 						onPress={clearFilters}
-					/>
+					>
+						<Text style={styles.buttonText}>Limpar filtros</Text>
+					</TouchableOpacity>
 				</View>
 			</View>
 			<View style={styles.inputArea}>
@@ -185,4 +180,4 @@ export default function Casos() {
 			</View>
 		</ScrollView>
 	);
-};
+}

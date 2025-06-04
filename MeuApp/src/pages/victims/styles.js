@@ -27,10 +27,12 @@ export default StyleSheet.create({
 	button: {
 		flex: 1,
 		backgroundColor: '#007bff',
+		color: '#fff',
 		padding: 15,
 		borderRadius: 8,
 		marginRight: 10,
 		alignItems: 'center',
+
 	},
 	buttonSecondary: {
 		flex: 1,

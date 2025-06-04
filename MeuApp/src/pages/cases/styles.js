@@ -6,17 +6,29 @@ const styles = StyleSheet.create({
 		padding: 16,
 		backgroundColor: COLORS.lightBackground,
 	},
-	title: {
-		color: COLORS.primary,
-		fontSize: 24,
-		fontWeight: 'bold',
-		marginBottom: 16,
-	},
 	buttons: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: 16,
-		gap: 8,
+		marginBottom: 15,
+	},
+	button: {
+		flex: 1,
+		backgroundColor: COLORS.primary,
+		padding: 15,
+		borderRadius: 8,
+		marginRight: 10,
+		alignItems: 'center',
+	},
+	buttonSecondary: {
+		flex: 1,
+		backgroundColor: COLORS.secondary,
+		padding: 15,
+		borderRadius: 8,
+		alignItems: 'center',
+	},
+	buttonText: {
+		color: COLORS.white,
+		fontWeight: 'bold',
 	},
 	inputArea: {
 		flexDirection: 'row',
