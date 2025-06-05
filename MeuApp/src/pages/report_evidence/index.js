@@ -13,6 +13,7 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
+import styles from './styles';
 
 export default function LaudoForm() {
     const navigation = useNavigation();
