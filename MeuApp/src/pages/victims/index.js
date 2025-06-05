@@ -41,7 +41,7 @@ export default function Vitimas() {
 					headers: { Authorization: `Bearer ${token}` },
 				}
 			);
-            console.log('resposta da api', response.data)
+			console.log('resposta da api', response.data);
 			setVictims(response.data);
 		} catch (error) {
 			Dialog.show({
@@ -50,7 +50,7 @@ export default function Vitimas() {
 				textBody: 'Erro ao buscar vítimas.',
 				button: 'OK',
 			});
-            console.error('erro', error.response.data)
+			console.error('erro', error.response.data);
 		}
 	};
 
@@ -145,11 +145,17 @@ export default function Vitimas() {
 				<Text style={styles.title}>Banco de Dados da Vítima</Text>
 
 				<View style={styles.row}>
-					<TouchableOpacity style={styles.button} onPress={handleCreateVictim}>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={handleCreateVictim}
+					>
 						<Text style={styles.buttonText}>Adicionar Vítima</Text>
 					</TouchableOpacity>
 
-					<TouchableOpacity style={styles.buttonSecondary} onPress={clearFilters}>
+					<TouchableOpacity
+						style={styles.buttonSecondary}
+						onPress={clearFilters}
+					>
 						<Text style={styles.buttonText}>Limpar Filtros</Text>
 					</TouchableOpacity>
 				</View>
@@ -174,7 +180,7 @@ export default function Vitimas() {
 					style={styles.input}
 					placeholder="Status (ABERTO, FINALIZADO, ARQUIVADO)"
 					value={statusFilter}
-					onChangeText={(text) => {
+					onChangeText={text => {
 						setStatusFilter(text);
 						setPage(1);
 					}}
@@ -184,21 +190,26 @@ export default function Vitimas() {
 					<View key={index} style={styles.card}>
 						<Text style={styles.cardTitle}>{victim.nic}</Text>
 						<Text style={styles.cardInfo}>Nome: {victim.name}</Text>
-						<Text style={styles.cardInfo}>Status: {victim.identificationStatus}</Text>
-						
+						<Text style={styles.cardInfo}>
+							Status: {victim.identificationStatus}
+						</Text>
 					</View>
 				))}
 
 				<View style={styles.pagination}>
-					{[...Array(Math.ceil(victims.length / victimsPerPage))].map((_, i) => (
-						<TouchableOpacity
-							key={i}
-							style={styles.pageButton}
-							onPress={() => setPage(i + 1)}
-						>
-							<Text style={styles.pageButtonText}>{i + 1}</Text>
-						</TouchableOpacity>
-					))}
+					{[...Array(Math.ceil(victims.length / victimsPerPage))].map(
+						(_, i) => (
+							<TouchableOpacity
+								key={i}
+								style={styles.pageButton}
+								onPress={() => setPage(i + 1)}
+							>
+								<Text style={styles.pageButtonText}>
+									{i + 1}
+								</Text>
+							</TouchableOpacity>
+						)
+					)}
 				</View>
 			</ScrollView>
 		</KeyboardAvoidingView>

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, ActivityIndicator } from 'react-native';
 import { Card, Text, IconButton } from 'react-native-paper';
+import { useNavigation } from '@react-navigation/native'; 
 import styles from './styles';
 
 export default function CardCases({ cases }) {
+	const navigation = useNavigation(); 
 	const [tableCases, setTableCases] = useState(cases || []);
 	const [loading, setLoading] = useState(false);
 
@@ -94,10 +96,10 @@ export default function CardCases({ cases }) {
 						<Card.Actions>
 							<IconButton
 								icon="eye-outline"
-								onPress={() => verDetalhes(item.protocol)}
+								onPress={() => navigation.navigate('CaseDetails', { protocol: item.protocol })}
 								accessibilityLabel="Ver detalhes"
 								iconColor={styles.icon.color}
-								containerColor={styles.icon.backgroundColor} 
+								containerColor={styles.icon.backgroundColor}
 							/>
 							<IconButton
 								icon="pencil-outline"
