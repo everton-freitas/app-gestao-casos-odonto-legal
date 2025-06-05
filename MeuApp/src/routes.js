@@ -67,6 +67,15 @@ export default function Routes() {
 							),
 						}}
 					/>
+					<Stack.Screen
+						name="ReportEvidence"
+						component={ReportEvidence}
+						options={{
+							header: () => (
+								<CustomHeader title="Gerar Laudo da Evidência" />
+							),
+						}}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</AlertNotificationRoot>
