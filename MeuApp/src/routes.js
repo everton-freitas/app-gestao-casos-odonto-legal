@@ -72,7 +72,7 @@ export default function Routes() {
 						component={ReportEvidence}
 						options={{
 							header: () => (
-								<CustomHeader title="Gerar Laudo da Evidência" />
+								<CustomHeader title="Laudo da Evidência" />
 							),
 						}}
 					/>

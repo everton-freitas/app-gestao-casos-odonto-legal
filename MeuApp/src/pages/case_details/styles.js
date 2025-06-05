@@ -12,21 +12,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: COLORS.lightBackground,
 	},
-	goBack: {
-		marginBottom: 12,
-	},
-	goBackText: {
-		color: COLORS.primary,
-		fontWeight: 'bold',
-		fontSize: 16,
-	},
-	title: {
-		color: COLORS.primary,
-		fontSize: 26,
-		fontWeight: 'bold',
-		marginBottom: 18,
-		textAlign: 'center',
-	},
 	section: {
 		gap: 18,
 	},

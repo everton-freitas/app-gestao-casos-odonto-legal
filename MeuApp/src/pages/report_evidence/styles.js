@@ -3,24 +3,10 @@ import { COLORS } from '../../Colors';
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor: COLORS.evidence,
         padding: 20,
-        backgroundColor: '#F6F8FA',
-    },
-    title: {
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#1E88E5',
-        marginBottom: 16,
-        textAlign: 'center',
-    },
-    goBack: {
-        color: '#1E88E5',
-        fontWeight: 'bold',
-        marginBottom: 12,
-        fontSize: 16,
     },
     evidenceInfo: {
-        backgroundColor: '#F6F8FA',
         padding: 16,
         borderRadius: 8,
         marginBottom: 18,
@@ -28,7 +14,7 @@ const styles = StyleSheet.create({
     legend: {
         fontWeight: 'bold',
         fontSize: 18,
-        color: '#1E88E5',
+        color: COLORS.primary,
         marginBottom: 8,
     },
     info: {
@@ -38,7 +24,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontWeight: 'bold',
-        color: '#1E88E5',
+        color: COLORS.primary,
     },
     imageWrapper: {
         marginTop: 10,
@@ -66,7 +52,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginTop: 12,
         marginBottom: 4,
-        color: '#1E88E5',
+        color: COLORS.primary,
     },
     textarea: {
         width: '100%',
@@ -76,18 +62,20 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         padding: 8,
         marginBottom: 8,
-        backgroundColor: '#F6F8FA',
+        backgroundColor: COLORS.lightBackground,
         textAlignVertical: 'top',
     },
     button: {
-        backgroundColor: '#1E88E5',
+        backgroundColor: COLORS.primary,
         paddingVertical: 14,
         borderRadius: 8,
+        alignSelf: 'center',
         alignItems: 'center',
         marginTop: 16,
+        width: '50%',
     },
     buttonText: {
-        color: '#fff',
+        color: COLORS.white,
         fontWeight: 'bold',
         fontSize: 16,
     },
