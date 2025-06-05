@@ -87,7 +87,6 @@ export default function LaudoForm() {
 			behavior={Platform.OS === 'ios' ? 'padding' : undefined}
 		>
 			<ScrollView contentContainerStyle={styles.container}>
-				{/* Primeiro o formulário */}
 				<View style={styles.formContainer}>
 					<Text style={styles.inputLabel}>Análise Técnica:*</Text>
 					<TextInput

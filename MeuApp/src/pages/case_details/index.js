@@ -403,13 +403,11 @@ export default function CaseDetails() {
 													Não disponível
 												</Text>
 											)}
-
-											{/* Laudo Gerado ou Gerar Laudo */}
 											{evid.reportEvidence ? (
 												<View style={styles.laudoBox}>
 													<Text
 														style={
-															styles.sectionTitle
+															styles.sectionTitleLaudoGerado
 														}
 													>
 														Laudo Gerado
