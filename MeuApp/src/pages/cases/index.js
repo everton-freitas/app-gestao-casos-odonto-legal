@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import CardCases from '../../components/cardCases';
 import InputSearch from '../../components/inputSearch';
 import Filters from '../../components/filters';
@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import styles from './styles';
 import { COLORS } from '../../Colors';
+import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 
 export default function Casos() {
 	const [cases, setCases] = useState([]);
@@ -37,7 +38,12 @@ export default function Casos() {
 			);
 			setCases(response.data);
 		} catch (error) {
-			console.log('Erro ao buscar dados:', error);
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro!',
+				textBody: 'Erro ao buscar casos.',
+				button: 'OK',
+			});
 		}
 		setLoading(false);
 	};
@@ -59,10 +65,12 @@ export default function Casos() {
 			);
 			setCases(response.data);
 		} catch (error) {
-			console.log(
-				'Nenhum caso encontrado!',
-				error?.response?.data?.message || error.message
-			);
+			Dialog.show({
+				type: ALERT_TYPE.WARNING,
+				title: 'Nenhum caso encontrado!',
+				textBody: error?.response?.data?.message || error.message,
+				button: 'OK',
+			});
 			setStatusFilter('');
 		}
 		setLoading(false);
@@ -84,7 +92,12 @@ export default function Casos() {
 				getData();
 			}
 		} catch (err) {
-			console.log('Erro!', err.message);
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro!',
+				textBody: err.message,
+				button: 'OK',
+			});
 		}
 		setLoading(false);
 	};
@@ -102,7 +115,12 @@ export default function Casos() {
 			);
 			setCases([response.data]);
 		} catch (err) {
-			console.log('Nenhum caso encontrado!', err.message);
+			Dialog.show({
+				type: ALERT_TYPE.WARNING,
+				title: 'Nenhum caso encontrado!',
+				textBody: err.message,
+				button: 'OK',
+			});
 		}
 		setLoading(false);
 	};
