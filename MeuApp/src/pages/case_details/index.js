@@ -5,7 +5,6 @@ import {
 	ScrollView,
 	TouchableOpacity,
 	Image,
-	Alert,
 	ActivityIndicator,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
@@ -13,6 +12,7 @@ import { COLORS } from '../../Colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import styles from './styles';
+import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 
 function formatDate(dateString) {
 	if (!dateString) return 'N/A';
@@ -35,10 +35,21 @@ export default function CaseDetails() {
 		navigation.navigate('AddEvidence', { protocol });
 	};
 
-	const handleGenerateReport = () => {
-		// Troque para a navegação correta do seu app
-		navigation.navigate('GenerateReport', {
+	const handleGenerateReport = evidence => {
+		navigation.navigate('ReportEvidence', {
+			evidence,
 			protocol: caseDetails.protocol,
+		});
+	};
+
+	// Imprimir laudo (implemente a navegação se desejar)
+	const handlePrintReport = evidence => {
+		// Exemplo: navigation.navigate('PrintEvidenceReport', { evidence, protocol: caseDetails.protocol });
+		Dialog.show({
+			type: ALERT_TYPE.INFO,
+			title: 'Funcionalidade não implementada',
+			textBody: 'Impressão de laudo ainda não disponível.',
+			button: 'OK',
 		});
 	};
 
@@ -56,10 +67,14 @@ export default function CaseDetails() {
 				);
 				setCaseDetails(response.data);
 			} catch (err) {
-				Alert.alert(
-					'Erro',
-					err.response?.data?.message || 'Tente novamente mais tarde.'
-				);
+				Dialog.show({
+					type: ALERT_TYPE.DANGER,
+					title: 'Erro!',
+					textBody:
+						err.response?.data?.message ||
+						'Tente novamente mais tarde.',
+					button: 'OK',
+				});
 			}
 			setLoading(false);
 		};
@@ -388,14 +403,92 @@ export default function CaseDetails() {
 													Não disponível
 												</Text>
 											)}
-											<TouchableOpacity
-												style={styles.buttonLaudo}
-												onPress={handleGenerateReport}
-											>
-												<Text style={styles.buttonText1}>
-													Gerar laudo
-												</Text>
-											</TouchableOpacity>
+											{evid.reportEvidence ? (
+												<View style={styles.laudoBox}>
+													<Text
+														style={
+															styles.sectionTitleLaudoGerado
+														}
+													>
+														Laudo Gerado
+													</Text>
+													<Text style={styles.info}>
+														<Text
+															style={styles.label}
+														>
+															Conclusão do Laudo:
+														</Text>{' '}
+														{evid.reportEvidence
+															.note || 'N/A'}
+													</Text>
+													<Text style={styles.info}>
+														<Text
+															style={styles.label}
+														>
+															Análise Técnica:
+														</Text>{' '}
+														{evid.reportEvidence
+															.descriptionTechnical ||
+															'N/A'}
+													</Text>
+													<Text style={styles.info}>
+														<Text
+															style={styles.label}
+														>
+															Concluído por:
+														</Text>{' '}
+														{evid.reportEvidence
+															.responsible
+															?.name || 'N/A'}
+													</Text>
+													<Text style={styles.info}>
+														<Text
+															style={styles.label}
+														>
+															Data do Laudo:
+														</Text>{' '}
+														{formatDate(
+															evid.reportEvidence
+																.createdAt
+														)}
+													</Text>
+													<TouchableOpacity
+														style={
+															styles.buttonLaudo
+														}
+														onPress={() =>
+															handlePrintReport(
+																evid
+															)
+														}
+													>
+														<Text
+															style={
+																styles.buttonText1
+															}
+														>
+															Imprimir laudo
+														</Text>
+													</TouchableOpacity>
+												</View>
+											) : (
+												<TouchableOpacity
+													style={styles.buttonLaudo}
+													onPress={() =>
+														handleGenerateReport(
+															evid
+														)
+													}
+												>
+													<Text
+														style={
+															styles.buttonText1
+														}
+													>
+														Gerar laudo
+													</Text>
+												</TouchableOpacity>
+											)}
 										</View>
 									))}
 								</>

@@ -12,26 +12,11 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: COLORS.lightBackground,
 	},
-	goBack: {
-		marginBottom: 12,
-	},
-	goBackText: {
-		color: COLORS.primary,
-		fontWeight: 'bold',
-		fontSize: 16,
-	},
-	title: {
-		color: COLORS.primary,
-		fontSize: 26,
-		fontWeight: 'bold',
-		marginBottom: 18,
-		textAlign: 'center',
-	},
 	section: {
 		gap: 18,
 	},
 	cardSection: {
-		backgroundColor: COLORS.lightBackground,
+		backgroundColor: COLORS.white,
 		borderRadius: 10,
 		padding: 16,
 		marginBottom: 18,
@@ -50,6 +35,16 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		paddingBottom: 4,
 	},
+	sectionTitleLaudoGerado: {
+		fontSize: 18,
+		fontWeight: 'bold',
+		color: COLORS.primary,
+		borderBottomWidth: 1,
+		borderBottomColor: COLORS.disabledColor,
+		marginTop: 15,
+		marginBottom: 10,
+		paddingBottom: 4,
+	},
 	info: {
 		color: COLORS.primary,
 		marginBottom: 4,
@@ -60,13 +55,13 @@ const styles = StyleSheet.create({
 		color: COLORS.primary,
 	},
 	professionalCard: {
-		backgroundColor: COLORS.evidence,
+		backgroundColor: COLORS.lightBackground,
 		borderRadius: 8,
 		padding: 10,
 		marginBottom: 8,
 	},
 	card: {
-		backgroundColor: COLORS.evidence,
+		backgroundColor: COLORS.lightBackground,
 		borderRadius: 8,
 		padding: 12,
 		marginBottom: 12,

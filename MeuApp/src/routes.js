@@ -8,9 +8,9 @@ import Login from './pages/login';
 import NewPassword from './pages/new_password';
 import TabRoutes from './TabRoutes';
 import Profile from './pages/profile';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import CaseDetails from './pages/case_details';
-import CustomHeader from './components/header/index';
+import CustomHeader from './components/header';
+import ReportEvidence from './pages/report_evidence';
 
 // Somente importa se não estiver na web
 const AlertNotificationRoot =
@@ -69,6 +69,15 @@ export default function Routes() {
 						options={{
 							header: () => (
 								<CustomHeader title="Detalhes do Caso" />
+							),
+						}}
+					/>
+					<Stack.Screen
+						name="ReportEvidence"
+						component={ReportEvidence}
+						options={{
+							header: () => (
+								<CustomHeader title="Laudo da Evidência" />
 							),
 						}}
 					/>
