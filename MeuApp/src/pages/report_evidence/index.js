@@ -87,6 +87,39 @@ export default function LaudoForm() {
 			behavior={Platform.OS === 'ios' ? 'padding' : undefined}
 		>
 			<ScrollView contentContainerStyle={styles.container}>
+				{/* Primeiro o formulário */}
+				<View style={styles.formContainer}>
+					<Text style={styles.inputLabel}>Análise Técnica:*</Text>
+					<TextInput
+						style={styles.textarea}
+						value={technicalAnalysis}
+						onChangeText={setTechnicalAnalysis}
+						multiline
+						numberOfLines={4}
+						placeholder="Digite a análise técnica"
+						required
+					/>
+					<Text style={styles.inputLabel}>Conclusão do Laudo:*</Text>
+					<TextInput
+						style={styles.textarea}
+						value={conclusion}
+						onChangeText={setConclusion}
+						multiline
+						numberOfLines={4}
+						placeholder="Digite a conclusão do laudo"
+						required
+					/>
+					<TouchableOpacity
+						style={styles.button}
+						onPress={handleSubmit}
+						disabled={loading || !technicalAnalysis || !conclusion}
+					>
+						<Text style={styles.buttonText}>
+							{loading ? 'Salvando...' : 'Salvar laudo'}
+						</Text>
+					</TouchableOpacity>
+				</View>
+				{/* Depois os dados da evidência */}
 				<View style={styles.evidenceInfo}>
 					<Text style={styles.legend}>Dados da Evidência</Text>
 					{evidence?.photo && (
@@ -120,37 +153,6 @@ export default function LaudoForm() {
 						<Text style={styles.label}>Categoria:</Text>{' '}
 						{evidence?.category}
 					</Text>
-				</View>
-				<View style={styles.formContainer}>
-					<Text style={styles.inputLabel}>Análise Técnica:*</Text>
-					<TextInput
-						style={styles.textarea}
-						value={technicalAnalysis}
-						onChangeText={setTechnicalAnalysis}
-						multiline
-						numberOfLines={4}
-						placeholder="Digite a análise técnica"
-						required
-					/>
-					<Text style={styles.inputLabel}>Conclusão do Laudo:*</Text>
-					<TextInput
-						style={styles.textarea}
-						value={conclusion}
-						onChangeText={setConclusion}
-						multiline
-						numberOfLines={4}
-						placeholder="Digite a conclusão do laudo"
-						required
-					/>
-					<TouchableOpacity
-						style={styles.button}
-						onPress={handleSubmit}
-						disabled={loading || !technicalAnalysis || !conclusion}
-					>
-						<Text style={styles.buttonText}>
-							{loading ? 'Salvando...' : 'Salvar laudo'}
-						</Text>
-					</TouchableOpacity>
 				</View>
 			</ScrollView>
 		</KeyboardAvoidingView>

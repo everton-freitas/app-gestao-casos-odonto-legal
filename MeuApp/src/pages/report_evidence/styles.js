@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
     },
     legend: {
         fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 20,
         color: COLORS.primary,
         marginBottom: 8,
     },
