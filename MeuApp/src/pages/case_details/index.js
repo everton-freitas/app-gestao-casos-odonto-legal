@@ -52,12 +52,7 @@ export default function CaseDetails() {
 	};
 
 	const handleGenerateFinalReport = () => {
-		Dialog.show({
-			type: ALERT_TYPE.INFO,
-			title: 'Funcionalidade não implementada',
-			textBody: 'Geração de relatório ainda não disponível.',
-			button: 'OK',
-		});
+		navigation.navigate('CaseReport', { caseDetails });
 	};
 
 	const handlePrintFinalReport = () => {
