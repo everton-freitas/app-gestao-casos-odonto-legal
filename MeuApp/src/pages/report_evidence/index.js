@@ -118,7 +118,6 @@ export default function LaudoForm() {
 						</Text>
 					</TouchableOpacity>
 				</View>
-				{/* Depois os dados da evidência */}
 				<View style={styles.evidenceInfo}>
 					<Text style={styles.legend}>Dados da Evidência</Text>
 					{evidence?.photo && (
