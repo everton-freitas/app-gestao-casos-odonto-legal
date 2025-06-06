@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 	},
 	sectionDivider: {
 		borderBottomWidth: 1,
-		borderBottomColor: '#B0BEC5',
+		borderBottomColor: COLORS.disabledColor,
 		marginBottom: 10,
 		marginTop: 2,
 	},

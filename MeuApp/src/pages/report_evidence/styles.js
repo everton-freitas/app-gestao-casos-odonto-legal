@@ -79,6 +79,12 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 16,
 	},
+	sectionDivider: {
+		borderBottomWidth: 1,
+		borderBottomColor: COLORS.disabledColor,
+		marginBottom: 10,
+		marginTop: 2,
+	},
 });
 
 export default styles;
