@@ -42,13 +42,24 @@ export default function CaseDetails() {
 		});
 	};
 
-	// Imprimir laudo (implemente a navegação se desejar)
 	const handlePrintReport = evidence => {
-		// Exemplo: navigation.navigate('PrintEvidenceReport', { evidence, protocol: caseDetails.protocol });
 		Dialog.show({
 			type: ALERT_TYPE.INFO,
 			title: 'Funcionalidade não implementada',
 			textBody: 'Impressão de laudo ainda não disponível.',
+			button: 'OK',
+		});
+	};
+
+	const handleGenerateFinalReport = () => {
+		navigation.navigate('CaseReport', { caseDetails });
+	};
+
+	const handlePrintFinalReport = () => {
+		Dialog.show({
+			type: ALERT_TYPE.INFO,
+			title: 'Funcionalidade não implementada',
+			textBody: 'Impressão de relatório ainda não disponível.',
 			button: 'OK',
 		});
 	};
@@ -503,11 +514,40 @@ export default function CaseDetails() {
 									addEvidence(caseDetails.protocol)
 								}
 							>
-								<Text style={styles.buttonText2}>
+								<Text style={styles.buttonText1}>
 									Adicionar evidências
 								</Text>
 							</TouchableOpacity>
 						</View>
+
+						{caseDetails.evidence?.length > 0 &&
+							caseDetails.evidence.every(
+								ev =>
+									ev.reportEvidence &&
+									ev.reportEvidence.note?.trim() &&
+									ev.reportEvidence.descriptionTechnical?.trim() &&
+									ev.reportEvidence.responsible?.name?.trim() &&
+									ev.reportEvidence.createdAt
+							) && (
+								<View>
+									<TouchableOpacity
+										style={styles.buttonRelatorio}
+										onPress={() => {
+											if (caseDetails.caseReport) {
+												handlePrintFinalReport();
+											} else {
+												handleGenerateFinalReport();
+											}
+										}}
+									>
+										<Text style={styles.buttonText2}>
+											{caseDetails.caseReport
+												? 'Imprimir relatório'
+												: 'Gerar relatório'}
+										</Text>
+									</TouchableOpacity>
+								</View>
+							)}
 					</View>
 				) : (
 					<Text style={styles.info}>

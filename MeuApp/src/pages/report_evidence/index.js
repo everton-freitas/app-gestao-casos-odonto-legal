@@ -118,9 +118,9 @@ export default function LaudoForm() {
 						</Text>
 					</TouchableOpacity>
 				</View>
-				{/* Depois os dados da evidência */}
-				<View style={styles.evidenceInfo}>
+				<View style={styles.formContainer}>
 					<Text style={styles.legend}>Dados da Evidência</Text>
+					<View style={styles.sectionDivider} />
 					{evidence?.photo && (
 						<View style={styles.imageWrapper}>
 							<Image

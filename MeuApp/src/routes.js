@@ -11,6 +11,7 @@ import Profile from './pages/profile';
 import CaseDetails from './pages/case_details';
 import CustomHeader from './components/header';
 import ReportEvidence from './pages/report_evidence';
+import CaseReport from './pages/case_report';
 
 // Somente importa se não estiver na web
 const AlertNotificationRoot =
@@ -78,6 +79,15 @@ export default function Routes() {
 						options={{
 							header: () => (
 								<CustomHeader title="Laudo da Evidência" />
+							),
+						}}
+					/>
+					<Stack.Screen
+						name="CaseReport"
+						component={CaseReport}
+						options={{
+							header: () => (
+								<CustomHeader title="Relatório do Caso" />
 							),
 						}}
 					/>
