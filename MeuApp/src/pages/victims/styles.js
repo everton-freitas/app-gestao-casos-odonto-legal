@@ -1,33 +1,17 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../../Colors';
 
-export default StyleSheet.create({
-	container: {
-		padding: 20,
-		backgroundColor: '#f5f5f5',
+const styles = StyleSheet.create({
+	headerArea: {
+		padding: 16,
 	},
-	title: {
-		fontSize: 24,
-		fontWeight: 'bold',
-		marginBottom: 20,
-	},
-	row: {
+	buttons: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: 15,
-	},
-	input: {
-		height: 50,
-		backgroundColor: '#fff',
-		borderRadius: 8,
-		paddingHorizontal: 15,
-		marginBottom: 10,
-		borderWidth: 1,
-		borderColor: '#ddd',
 	},
 	button: {
 		flex: 1,
-		backgroundColor: '#007bff',
-		color: '#fff',
+		backgroundColor: COLORS.primary,
 		padding: 15,
 		borderRadius: 8,
 		marginRight: 10,
@@ -35,43 +19,42 @@ export default StyleSheet.create({
 	},
 	buttonSecondary: {
 		flex: 1,
-		backgroundColor: '#6c757d',
+		backgroundColor: COLORS.secondary,
 		padding: 15,
 		borderRadius: 8,
 		alignItems: 'center',
 	},
-	buttonText: {
-		color: '#fff',
+	buttonText1: {
+		color: COLORS.white,
 		fontWeight: 'bold',
 	},
-	card: {
-		backgroundColor: '#fff',
-		padding: 15,
-		borderRadius: 8,
-		marginBottom: 10,
-		borderWidth: 1,
-		borderColor: '#ddd',
-	},
-	cardTitle: {
-		fontSize: 18,
+	buttonText2: {
+		color: COLORS.black,
 		fontWeight: 'bold',
 	},
-	cardInfo: {
-		fontSize: 14,
-		color: '#333',
+	inputArea: {
+		justifyContent: 'space-between',
+		marginBottom: 2,
 	},
 	pagination: {
 		flexDirection: 'row',
-		flexWrap: 'wrap',
-		marginTop: 20,
+		justifyContent: 'center',
+		marginVertical: 16,
 	},
-	pageButton: {
-		padding: 10,
-		margin: 5,
-		backgroundColor: '#007bff',
-		borderRadius: 5,
+	pag: {
+		backgroundColor: COLORS.secondary,
+		paddingVertical: 8,
+		paddingHorizontal: 16,
+		borderRadius: 6,
+		marginHorizontal: 4,
 	},
-	pageButtonText: {
-		color: '#fff',
+	pagActive: {
+		backgroundColor: COLORS.primary,
+	},
+	pagText: {
+		color: COLORS.black,
+		fontWeight: 'bold',
 	},
 });
+
+export default styles;
