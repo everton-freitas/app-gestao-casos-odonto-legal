@@ -8,6 +8,7 @@ import {
 	TouchableOpacity,
 	KeyboardAvoidingView,
 	Platform,
+	ActivityIndicator,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
@@ -23,6 +24,42 @@ export default function LaudoForm() {
 	const [conclusion, setConclusion] = useState('');
 	const [technicalAnalysis, setTechnicalAnalysis] = useState('');
 	const [loading, setLoading] = useState(false);
+	const [loadingAI, setLoadingAI] = useState(false);
+	const handleGenerateConclusion = async () => {
+		setLoadingAI(true);
+		const token = await AsyncStorage.getItem('token');
+		try {
+			const response = await axios.get(
+				`https://sistema-odonto-legal.onrender.com/api/llm/generate/laudo`,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+					params: {
+						evidence: evidence._id,
+					},
+				}
+			);
+			console.log(response.data);
+			setConclusion(response.data);
+			Dialog.show({
+				type: ALERT_TYPE.SUCCESS,
+				title: 'Conclusão gerada!',
+				textBody: 'A conclusão foi preenchida com a sugestão da IA.',
+				autoClose: 2000,
+			});
+		} catch (error) {
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro ao gerar conclusão',
+				textBody:
+					error.response?.data?.message ||
+					'Tente novamente mais tarde.',
+				button: 'OK',
+			});
+		}
+		setLoadingAI(false);
+	};
 
 	const handleSubmit = async () => {
 		Dialog.show({
@@ -98,7 +135,17 @@ export default function LaudoForm() {
 						placeholder="Digite a análise técnica"
 						required
 					/>
-					<Text style={styles.inputLabel}>Conclusão do Laudo:*</Text>
+					<View
+						style={{
+							flexDirection: 'row',
+							justifyContent: 'space-between',
+							alignItems: 'center',
+						}}
+					>
+						<Text style={styles.inputLabel}>
+							Conclusão do Laudo:*
+						</Text>
+					</View>
 					<TextInput
 						style={styles.textarea}
 						value={conclusion}
@@ -108,6 +155,19 @@ export default function LaudoForm() {
 						placeholder="Digite a conclusão do laudo"
 						required
 					/>
+					<TouchableOpacity
+						onPress={handleGenerateConclusion}
+						disabled={loadingAI}
+						style={styles.aiButton}
+					>
+						{loadingAI ? (
+							<ActivityIndicator size="small" color="#fff" />
+						) : (
+							<Text style={styles.aiButtonText}>
+								Gerar conclusão com IA ✨
+							</Text>
+						)}
+					</TouchableOpacity>
 					<TouchableOpacity
 						style={styles.button}
 						onPress={handleSubmit}

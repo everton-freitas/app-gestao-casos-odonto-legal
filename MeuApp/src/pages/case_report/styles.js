@@ -97,6 +97,20 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 16,
 	},
+	aiButton: {
+		backgroundColor: '#673AB7',
+		paddingHorizontal: 12,
+		paddingVertical: 8,
+		borderRadius: 8,
+		elevation: 2,
+		alignSelf: 'center',
+		marginTop: 8,
+	},
+	aiButtonText: {
+		color: '#fff',
+		fontWeight: 'bold',
+		fontSize: 14,
+	},
 });
 
 export default styles;
