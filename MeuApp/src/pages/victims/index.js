@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
 import styles from './styles';
 import { COLORS } from '../../Colors';
+import Odontograma from '../../components/odontograma/odontograma';
 
 export default function Vitimas() {
 	const [victims, setVictims] = useState([]);
@@ -139,7 +140,7 @@ export default function Vitimas() {
 						style={styles.button}
 						onPress={handleCreateVictim}
 					>
-						<Text style={styles.buttonText1}>Cadastrar vítima</Text>
+						<Text onPress={() => navigation.navigate('CreateVictim')} style={styles.buttonText1}>Cadastrar vítima</Text>
 					</TouchableOpacity>
 					<TouchableOpacity
 						style={styles.buttonSecondary}
@@ -188,9 +189,11 @@ export default function Vitimas() {
 								{i + 1}
 							</Text>
 						</TouchableOpacity>
+						
 					);
 				})}
 			</View>
+			    
 		</ScrollView>
 	);
 }
