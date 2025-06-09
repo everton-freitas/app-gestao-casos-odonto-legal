@@ -90,7 +90,6 @@ const VictimsStatusChart = () => {
             paddingLeft={(screenWidth / 2) - 120} 
         />
         
-        {/* Sua legenda manual continua aqui... */}
         <View style={styles.legendContainer}>
             {chartData.map(item => (
                 <View key={item.name} style={styles.legendItem}>
