@@ -23,7 +23,7 @@ const CreateVictim = () => {
   const [formData, setFormData] = useState({
     nic: "",
     name: "N/A",
-    age: "",
+    age: 0,
     cpf: "",
     gender: "OUTRO",
     location: {
@@ -93,9 +93,10 @@ const CreateVictim = () => {
         },
       });
       Alert.alert("Sucesso", "Vítima cadastrada com sucesso!");
-      navigation.navigate("VictimList");
+      navigation.navigate("Vitimas");
     } catch (err) {
       Alert.alert("Erro", err.response?.data?.message || "Algo deu errado.");
+      console.log('erro na criacao de vitima', err.response.data)
     }
   };
 

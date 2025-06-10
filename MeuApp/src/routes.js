@@ -14,6 +14,7 @@ import ReportEvidence from './pages/report_evidence';
 import CaseReport from './pages/case_report';
 import CreateVictim from './pages/createVictim';
 import Vitimas from './pages/victims';
+import VictimDetail from './pages/victim_details';
 
 // Somente importa se não estiver na web
 const AlertNotificationRoot =
@@ -72,6 +73,15 @@ export default function Routes() {
 						options={{
 							header: () => (
 								<CustomHeader title="Detalhes do Caso" />
+							),
+						}}
+					/>
+					<Stack.Screen
+						name="VictimDetail"
+						component={VictimDetail}
+						options={{
+							header: () => (
+								<CustomHeader title="Detalhes da vitima" />
 							),
 						}}
 					/>

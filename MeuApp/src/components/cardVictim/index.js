@@ -88,9 +88,10 @@ export default function CardVictims({ victims }) {
 							<IconButton
 								icon="eye-outline"
 								onPress={() =>
-									navigation.navigate('VictimDetails', { nic: victim.nic })
+									navigation.navigate('VictimDetail', { nic: victim.nic })
 								}
 								accessibilityLabel="Ver detalhes"
+								
 								iconColor={styles.icon.color}
 								containerColor={styles.icon.backgroundColor}
 							/>
