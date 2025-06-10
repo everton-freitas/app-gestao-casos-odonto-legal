@@ -7,11 +7,13 @@ import {
 	TouchableOpacity,
 	Alert,
 	Image,
+	ActivityIndicator,
 } from 'react-native';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import styles from './styles';
+import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 
 function formatDate(dateString) {
 	if (!dateString) return 'N/A';
@@ -32,6 +34,42 @@ export default function CaseReportForm() {
 	const numQuestions = caseData.questions?.length || 0;
 	const [answers, setAnswers] = useState(Array(numQuestions).fill(''));
 	const [status, setStatus] = useState('');
+	const [loadingAI, setLoadingAI] = useState(false);
+	const handleGenerateConclusion = async () => {
+		setLoadingAI(true);
+		const token = await AsyncStorage.getItem('token');
+		try {
+			const response = await axios.get(
+				`https://sistema-odonto-legal.onrender.com/api/llm/generate/case`,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+					params: {
+						case: caseData.protocol,
+					},
+				}
+			);
+			console.log(response.data);
+			setConclusion(response.data);
+			Dialog.show({
+				type: ALERT_TYPE.SUCCESS,
+				title: 'Conclusão gerada!',
+				textBody: 'A conclusão foi preenchida com a sugestão da IA.',
+				autoClose: 2000,
+			});
+		} catch (error) {
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro ao gerar conclusão',
+				textBody:
+					error.response?.data?.message ||
+					'Tente novamente mais tarde.',
+				button: 'OK',
+			});
+		}
+		setLoadingAI(false);
+	};
 
 	useEffect(() => {
 		if (!caseData || !caseData.id) {
@@ -123,6 +161,19 @@ export default function CaseReportForm() {
 					value={status}
 					onChangeText={setStatus}
 				/>
+				<TouchableOpacity
+					onPress={handleGenerateConclusion}
+					disabled={loadingAI}
+					style={styles.aiButton}
+				>
+					{loadingAI ? (
+						<ActivityIndicator size="small" color="#fff" />
+					) : (
+						<Text style={styles.aiButtonText}>
+							Gerar conclusão com IA ✨
+						</Text>
+					)}
+				</TouchableOpacity>
 				<TouchableOpacity
 					style={styles.buttonPrimary}
 					onPress={handleSubmit}
@@ -366,4 +417,3 @@ export default function CaseReportForm() {
 		</ScrollView>
 	);
 }
-
