@@ -14,6 +14,7 @@ import CustomHeader from './components/header';
 import ReportEvidence from './pages/report_evidence';
 import CaseReport from './pages/case_report';
 import EvidenceRegistrationPage from './pages/evidence_registration_page';
+import CaseCreated from './pages/case_created';
 
 const Stack = createStackNavigator();
 
@@ -93,6 +94,15 @@ export default function Routes() {
 						options={{
 							header: () => (
 								<CustomHeader title="Cadastrar Evidência" />
+							),
+						}}
+					/>
+					<Stack.Screen
+						name="CaseCreated"
+						component={CaseCreated}
+						options={{
+							header: () => (
+								<CustomHeader title="Cadastrar Novo Caso" />
 							),
 						}}
 					/>

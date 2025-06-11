@@ -149,9 +149,7 @@ export default function Casos() {
 				<View style={styles.buttons}>
 					<TouchableOpacity
 						style={styles.button}
-						onPress={() => {
-							/* navegação para cadastro */
-						}}
+						onPress={() => navigation.navigate('CaseCreated')}
 					>
 						<Text style={styles.buttonText1}>Cadastrar caso</Text>
 					</TouchableOpacity>
