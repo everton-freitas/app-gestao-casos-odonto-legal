@@ -15,6 +15,8 @@ import CaseReport from './pages/case_report';
 import CreateVictim from './pages/createVictim';
 import Vitimas from './pages/victims';
 import VictimDetail from './pages/victim_details';
+import GenerateReportScreen from './pages/imprimir_laudo';
+import ImprimirRelatorio from './pages/imprimir_relatorio';
 
 // Somente importa se não estiver na web
 const AlertNotificationRoot =
@@ -68,6 +70,16 @@ export default function Routes() {
 						}}
 					/>
 					<Stack.Screen
+						name="ImprimirRelatorio"
+						component={ImprimirRelatorio}
+						options={{
+							header: () => (
+								<CustomHeader title="Imprimir Relatorio" />
+							),
+						}}
+					/>
+					
+					<Stack.Screen
 						name="CaseDetails"
 						component={CaseDetails}
 						options={{
@@ -110,6 +122,15 @@ export default function Routes() {
 						options={{
 							header: () => (
 								<CustomHeader title="Relatório do Caso" />
+							),
+						}}
+					/>
+					<Stack.Screen
+						name="GenerateReportScreen"
+						component={GenerateReportScreen}
+						options={{
+							header: () => (
+								<CustomHeader title="Imprimir laudo" />
 							),
 						}}
 					/>

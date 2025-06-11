@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, ScrollView, StyleSheet, ActivityIndicator } from "react-native";
 import { useRoute } from "@react-navigation/native";
-import Odontograma from "../../components/odontograma/odontograma";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const VictimDetail = () => {
@@ -64,36 +63,45 @@ const VictimDetail = () => {
       {(victim.identificationStatus === "IDENTIFICADO" || victim.identificationStatus === "PARCIALMENTE IDENTIFICADO") && (
         <>
           <Text style={styles.label}>Nome:</Text>
-          <Text style={styles.value}>{victim.name}</Text>
+          <Text style={styles.value}>{victim.name || "N/A"}</Text>
 
           <Text style={styles.label}>Idade:</Text>
-          <Text style={styles.value}>{victim.age}</Text>
+          <Text style={styles.value}>{victim.age || "N/A"}</Text>
 
           <Text style={styles.label}>CPF:</Text>
-          <Text style={styles.value}>{victim.cpf}</Text>
+          <Text style={styles.value}>{victim.cpf || "N/A"}</Text>
 
           <Text style={styles.label}>Gênero:</Text>
-          <Text style={styles.value}>{victim.gender}</Text>
+          <Text style={styles.value}>{victim.gender || "N/A"}</Text>
 
           <Text style={styles.subTitle}>Endereço</Text>
-          <Text style={styles.value}>Rua: {victim.location?.street}</Text>
-          <Text style={styles.value}>Número: {victim.location?.houseNumber}</Text>
-          <Text style={styles.value}>Bairro: {victim.location?.district}</Text>
-          <Text style={styles.value}>Cidade: {victim.location?.city}</Text>
-          <Text style={styles.value}>Estado: {victim.location?.state}</Text>
-          <Text style={styles.value}>CEP: {victim.location?.zipCode}</Text>
+          <Text style={styles.value}>Rua: {victim.location?.street || "N/A"}</Text>
+          <Text style={styles.value}>Número: {victim.location?.houseNumber || "N/A"}</Text>
+          <Text style={styles.value}>Bairro: {victim.location?.district || "N/A"}</Text>
+          <Text style={styles.value}>Cidade: {victim.location?.city || "N/A"}</Text>
+          <Text style={styles.value}>Estado: {victim.location?.state || "N/A"}</Text>
+          <Text style={styles.value}>CEP: {victim.location?.zipCode || "N/A"}</Text>
           <Text style={styles.value}>Complemento: {victim.location?.complement || "N/A"}</Text>
         </>
       )}
 
       <Text style={styles.subTitle}>Odontograma</Text>
-      <Odontograma data={victim.odontogram} readOnly />
+
+      {victim.odontogram && victim.odontogram.length > 0 ? (
+        victim.odontogram.map((item, index) => (
+          <View key={index} style={styles.odontogramItem}>
+            <Text style={styles.label}>Dente {item.tooth}:</Text>
+            <Text style={styles.value}>{item.note || 'N/A'}</Text>
+          </View>
+        ))
+      ) : (
+        <Text style={styles.value}>Nenhuma informação odontológica registrada.</Text>
+      )}
     </ScrollView>
   );
 };
 
 export default VictimDetail;
-
 const styles = StyleSheet.create({
   container: {
     padding: 20,
@@ -118,4 +126,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     fontSize: 16,
   },
+  odontogramItem: {
+  flexDirection: 'row',
+  gap: 4,
+  marginBottom: 20,
+},
+label: {
+  fontWeight: 'bold',
+},
+value: {
+  flex: 1,
+},
 });

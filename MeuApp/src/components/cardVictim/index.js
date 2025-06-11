@@ -47,25 +47,20 @@ export default function CardVictims({ victims }) {
 							<Text>
 								<Text style={styles.cardText}>CPF: </Text>
 								<Text style={styles.valor}>
-									{victim.cpf || 'Não informado'}
+									{victim.cpf || 'N/A'}
 								</Text>
 							</Text>
-							<Text>
-								<Text style={styles.cardText}>RG: </Text>
-								<Text style={styles.valor}>
-									{victim.rg || 'Não informado'}
-								</Text>
-							</Text>
+							
 							<Text>
 								<Text style={styles.cardText}>Sexo: </Text>
 								<Text style={styles.valor}>
-									{victim.sex || 'Não informado'}
+									{victim.sex || 'N/A'}
 								</Text>
 							</Text>
 							<Text>
 								<Text style={styles.cardText}>Idade: </Text>
 								<Text style={styles.valor}>
-									{victim.age || 'Não informado'}
+									{victim.age || 'N/A'}
 								</Text>
 							</Text>
 							<Text>

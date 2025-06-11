@@ -18,7 +18,7 @@ export default function App() {
     useEffect(() => {
     async function prepare() {
       // Simula carregamento de dados
-      await new Promise(resolve => setTimeout(resolve, 20000));
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       await SplashScreen.hideAsync(); // Esconde a splash depois de carregar
     }

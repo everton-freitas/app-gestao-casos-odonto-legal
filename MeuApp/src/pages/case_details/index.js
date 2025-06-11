@@ -43,26 +43,33 @@ export default function CaseDetails() {
 	};
 
 	const handlePrintReport = evidence => {
-		Dialog.show({
-			type: ALERT_TYPE.INFO,
-			title: 'Funcionalidade não implementada',
-			textBody: 'Impressão de laudo ainda não disponível.',
-			button: 'OK',
-		});
+		const { protocol, patient } = caseDetails;
+
+	// Supondo que patient seja um array
+	navigation.navigate('GenerateReportScreen', {
+		evidence,
+		protocol,
+		caseDetails,
+		patient: Array.isArray(patient) ? patient[0] : patient,
+	});
+		
+		
+	};
+
+	const ImprimirRelatorio = () => {
+		
+
+	 navigation.navigate('ImprimirRelatorio', {
+      caseData: { caseDetails },
+    });
+		
 	};
 
 	const handleGenerateFinalReport = () => {
 		navigation.navigate('CaseReport', { caseDetails });
 	};
 
-	const handlePrintFinalReport = () => {
-		Dialog.show({
-			type: ALERT_TYPE.INFO,
-			title: 'Funcionalidade não implementada',
-			textBody: 'Impressão de relatório ainda não disponível.',
-			button: 'OK',
-		});
-	};
+	
 
 	useEffect(() => {
 		const fetchCaseDetails = async () => {
@@ -534,7 +541,7 @@ export default function CaseDetails() {
 										style={styles.buttonRelatorio}
 										onPress={() => {
 											if (caseDetails.caseReport) {
-												handlePrintFinalReport();
+												ImprimirRelatorio();
 											} else {
 												handleGenerateFinalReport();
 											}

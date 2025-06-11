@@ -35,7 +35,7 @@ const CreateVictim = () => {
       district: "",
       complement: "",
     },
-    identificationStatus: "",
+    identificationStatus: "NÃO IDENTIFICADO",
     odontogram: [],
   });
 
@@ -79,6 +79,7 @@ const CreateVictim = () => {
     const dataToSend = {
       ...formData,
       age: parseInt(formData.age),
+      gender: status ? formData.gender : "OUTRO", 
       location: {
         ...formData.location,
         houseNumber: parseInt(formData.location.houseNumber),
@@ -120,7 +121,7 @@ const CreateVictim = () => {
         }}
         style={styles.input}
       >
-        <Picker.Item label="NÃO IDENTIFICADO" value="NAO IDENTIFICADO" />
+        <Picker.Item label="NÃO IDENTIFICADO" value="NÃO IDENTIFICADO" />
         <Picker.Item label="IDENTIFICADO" value="IDENTIFICADO" />
         <Picker.Item label="PARCIALMENTE IDENTIFICADO" value="PARCIALMENTE IDENTIFICADO" />
       </Picker>
