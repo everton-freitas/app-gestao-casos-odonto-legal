@@ -248,7 +248,16 @@ export default function CaseCreated() {
 					button: 'OK',
 					onHide: () => {
 						limparCampos();
-						navigation.navigate('Home', { screen: 'Casos' });
+						// Força voltar para Casos e atualizar
+						navigation.reset({
+							index: 0,
+							routes: [
+								{
+									name: 'Home',
+									params: { screen: 'Casos', refresh: true },
+								},
+							],
+						});
 					},
 				});
 			} else {
@@ -482,7 +491,6 @@ export default function CaseCreated() {
 							))}
 					</View>
 				)}
-
 				<TouchableOpacity
 					style={styles.buttonPrimary}
 					onPress={handleSubmit}
