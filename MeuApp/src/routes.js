@@ -13,7 +13,7 @@ import CaseDetails from './pages/case_details';
 import CustomHeader from './components/header';
 import ReportEvidence from './pages/report_evidence';
 import CaseReport from './pages/case_report';
-import EvidenceRegistrationPage from './pages/evidence_registration_page'; 
+import EvidenceRegistrationPage from './pages/evidence_registration_page';
 
 const Stack = createStackNavigator();
 

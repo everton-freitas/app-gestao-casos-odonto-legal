@@ -6,7 +6,6 @@ import {
 	TouchableOpacity,
 	Image,
 	ScrollView,
-	Platform,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
@@ -33,7 +32,6 @@ export default function EvidenceRegistrationPage() {
 	const [obs, setObs] = useState('');
 	const [category, setCategory] = useState('');
 
-	// DropDownPicker states
 	const [openCondition, setOpenCondition] = useState(false);
 	const [openCategory, setOpenCategory] = useState(false);
 
@@ -173,7 +171,7 @@ export default function EvidenceRegistrationPage() {
 				button: 'OK',
 				onHide: () => {
 					resetForm();
-					navigation.navigate('Casos');
+					navigation.navigate('CaseDetails', { protocol });
 				},
 			});
 		} catch (error) {
