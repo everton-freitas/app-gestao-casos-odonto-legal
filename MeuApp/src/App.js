@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import Routes from './routes';
+import Routes from './Routes';
 import {
 	useFonts,
 	Roboto_400Regular,
