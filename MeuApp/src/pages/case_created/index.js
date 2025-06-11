@@ -8,7 +8,7 @@ import {
 	ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
+import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import DropDownPicker from 'react-native-dropdown-picker';
@@ -248,206 +248,224 @@ export default function CaseCreated() {
 
 	return (
 		<ScrollView contentContainerStyle={styles.container}>
-			<Text style={styles.title}>Cadastrar Novo Caso</Text>
-			<Text style={styles.label}>NIC*:</Text>
-			{nic.map((valor, i) => (
-				<TextInput
-					key={i}
-					style={styles.input}
-					placeholder={`Campo opcional ${i + 1}`}
-					value={valor}
-					onChangeText={text => handleChange(i, text)}
-				/>
-			))}
-			<TouchableOpacity style={styles.button} onPress={adicionarCampo}>
-				<Text style={styles.buttonText}>Adicionar outro NIC</Text>
-			</TouchableOpacity>
-
-			<Text style={styles.label}>Título*:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Título"
-				value={title}
-				onChangeText={setTitle}
-			/>
-			<Text style={styles.label}>Número do Inquérito*:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Número do Inquérito"
-				value={inquiryNumber}
-				onChangeText={setInquiryNumber}
-			/>
-			<Text style={styles.label}>Instituição Requisitante*:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Instituição requisitante"
-				value={requestingInstitution}
-				onChangeText={setRequestingInstitution}
-			/>
-			<Text style={styles.label}>Autoridade Requisitante*:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Autoridade requisitante"
-				value={requestingAuthority}
-				onChangeText={setRequestingAuthority}
-			/>
-			<Text style={styles.label}>Tipo de Caso*:</Text>
-			<DropDownPicker
-				open={openCaseType}
-				value={caseType}
-				items={caseTypeItems}
-				setOpen={setOpenCaseType}
-				setValue={setCaseType}
-				setItems={setCaseTypeItems}
-				placeholder="Selecione o tipo de caso"
-				style={styles.input}
-				containerStyle={{ marginBottom: 8 }}
-				zIndex={2000}
-				listMode="SCROLLVIEW"
-			/>
-			<Text style={styles.label}>Observações:</Text>
-			<TextInput
-				style={[styles.input, { height: 60 }]}
-				placeholder="Observações"
-				value={observations}
-				onChangeText={setObservations}
-				multiline
-			/>
-			<Text style={styles.label}>Perguntas do Requisitante*:</Text>
-			{questions.map((q, index) => (
-				<View
-					key={index}
-					style={{ flexDirection: 'row', alignItems: 'center' }}
-				>
+			<View style={styles.cardSection}>
+				<Text style={styles.label}>NIC*:</Text>
+				{nic.map((valor, i) => (
 					<TextInput
-						style={[styles.input, { flex: 1 }]}
-						placeholder={`Pergunta ${index + 1}`}
-						value={q.question}
-						onChangeText={text => handleQuestionChange(index, text)}
+						key={i}
+						style={styles.input}
+						placeholder={`Campo opcional ${i + 1}`}
+						value={valor}
+						onChangeText={text => handleChange(i, text)}
 					/>
-					{questions.length > 1 && (
-						<TouchableOpacity onPress={() => removeQuestion(index)}>
-							<Text style={{ color: 'red', marginLeft: 8 }}>
-								Remover
-							</Text>
-						</TouchableOpacity>
-					)}
-				</View>
-			))}
-			<TouchableOpacity style={styles.button} onPress={addQuestion}>
-				<Text style={styles.buttonText}>Adicionar nova pergunta</Text>
-			</TouchableOpacity>
+				))}
+				<TouchableOpacity
+					style={styles.button}
+					onPress={adicionarCampo}
+				>
+					<Text style={styles.buttonText}>Adicionar outro NIC</Text>
+				</TouchableOpacity>
 
-			<Text style={styles.label}>CEP:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Digite o CEP (apenas números)"
-				value={location.zipCode}
-				maxLength={8}
-				keyboardType="numeric"
-				onChangeText={text =>
-					handleLocationChange('zipCode', text.replace(/\D/g, ''))
-				}
-			/>
-			<Text style={styles.label}>Rua:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Digite o nome da rua"
-				value={location.street}
-				onChangeText={text => handleLocationChange('street', text)}
-			/>
-			<Text style={styles.label}>Número:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Digite o número da casa"
-				value={location.houseNumber}
-				keyboardType="numeric"
-				onChangeText={text => handleLocationChange('houseNumber', text)}
-			/>
-			<Text style={styles.label}>Bairro:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Digite o bairro"
-				value={location.district}
-				onChangeText={text => handleLocationChange('district', text)}
-			/>
-			<Text style={styles.label}>Estado:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Digite o estado"
-				value={location.state}
-				onChangeText={text => handleLocationChange('state', text)}
-			/>
-			<Text style={styles.label}>Cidade:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Digite a cidade"
-				value={location.city}
-				onChangeText={text => handleLocationChange('city', text)}
-			/>
-			<Text style={styles.label}>Complemento:</Text>
-			<TextInput
-				style={styles.input}
-				placeholder="Digite o complemento"
-				value={location.complement}
-				onChangeText={text => handleLocationChange('complement', text)}
-			/>
-
-			<Text style={styles.label}>Profissionais Envolvidos:</Text>
-			<TouchableOpacity
-				style={styles.button}
-				onPress={() => setDropdownOpen(!dropdownOpen)}
-			>
-				<Text style={styles.buttonText}>Selecionar profissionais</Text>
-			</TouchableOpacity>
-			{dropdownOpen && (
-				<View style={{ marginBottom: 12 }}>
-					{users.map(user => (
-						<TouchableOpacity
-							key={user._id}
-							style={{
-								flexDirection: 'row',
-								alignItems: 'center',
-								marginBottom: 4,
-							}}
-							onPress={() => toggleUser(user._id)}
-						>
-							<Text style={{ marginRight: 8 }}>
-								{envolved.includes(user._id) ? '☑' : '☐'}
-							</Text>
-							<Text>
-								{user.name} ({user.role})
-							</Text>
-						</TouchableOpacity>
-					))}
-				</View>
-			)}
-			{envolved.length > 0 && (
-				<View style={{ marginBottom: 12 }}>
-					<Text style={{ fontWeight: 'bold' }}>
-						Profissionais selecionados:
+				<Text style={styles.label}>Título*:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Título"
+					value={title}
+					onChangeText={setTitle}
+				/>
+				<Text style={styles.label}>Número do Inquérito*:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Número do Inquérito"
+					value={inquiryNumber}
+					onChangeText={setInquiryNumber}
+				/>
+				<Text style={styles.label}>Instituição Requisitante*:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Instituição requisitante"
+					value={requestingInstitution}
+					onChangeText={setRequestingInstitution}
+				/>
+				<Text style={styles.label}>Autoridade Requisitante*:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Autoridade requisitante"
+					value={requestingAuthority}
+					onChangeText={setRequestingAuthority}
+				/>
+				<Text style={styles.label}>Tipo de Caso*:</Text>
+				<DropDownPicker
+					open={openCaseType}
+					value={caseType}
+					items={caseTypeItems}
+					setOpen={setOpenCaseType}
+					setValue={setCaseType}
+					setItems={setCaseTypeItems}
+					placeholder="Selecione o tipo de caso"
+					style={styles.input}
+					containerStyle={{ marginBottom: 8 }}
+					zIndex={2000}
+					listMode="SCROLLVIEW"
+				/>
+				<Text style={styles.label}>Observações:</Text>
+				<TextInput
+					style={[styles.input, { height: 60 }]}
+					placeholder="Observações"
+					value={observations}
+					onChangeText={setObservations}
+					multiline
+				/>
+				<Text style={styles.label}>Perguntas do Requisitante*:</Text>
+				{questions.map((q, index) => (
+					<View
+						key={index}
+						style={{ flexDirection: 'row', alignItems: 'center' }}
+					>
+						<TextInput
+							style={[styles.input, { flex: 1 }]}
+							placeholder={`Pergunta ${index + 1}`}
+							value={q.question}
+							onChangeText={text =>
+								handleQuestionChange(index, text)
+							}
+						/>
+						{questions.length > 1 && (
+							<TouchableOpacity
+								onPress={() => removeQuestion(index)}
+							>
+								<Text style={{ color: 'red', marginLeft: 8 }}>
+									Remover
+								</Text>
+							</TouchableOpacity>
+						)}
+					</View>
+				))}
+				<TouchableOpacity style={styles.button} onPress={addQuestion}>
+					<Text style={styles.buttonText}>
+						Adicionar nova pergunta
 					</Text>
-					{users
-						.filter(u => envolved.includes(u._id))
-						.map(u => (
-							<Text key={u._id}>
-								{u.name} ({u.role})
-							</Text>
-						))}
-				</View>
-			)}
+				</TouchableOpacity>
 
-			<TouchableOpacity
-				style={styles.buttonPrimary}
-				onPress={handleSubmit}
-				disabled={loading}
-			>
-				{loading ? (
-					<ActivityIndicator color="#fff" />
-				) : (
-					<Text style={styles.buttonText2}>Cadastrar</Text>
+				<Text style={styles.label}>CEP:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Digite o CEP (apenas números)"
+					value={location.zipCode}
+					maxLength={8}
+					keyboardType="numeric"
+					onChangeText={text =>
+						handleLocationChange('zipCode', text.replace(/\D/g, ''))
+					}
+				/>
+				<Text style={styles.label}>Rua:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Digite o nome da rua"
+					value={location.street}
+					onChangeText={text => handleLocationChange('street', text)}
+				/>
+				<Text style={styles.label}>Número:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Digite o número da casa"
+					value={location.houseNumber}
+					keyboardType="numeric"
+					onChangeText={text =>
+						handleLocationChange('houseNumber', text)
+					}
+				/>
+				<Text style={styles.label}>Bairro:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Digite o bairro"
+					value={location.district}
+					onChangeText={text =>
+						handleLocationChange('district', text)
+					}
+				/>
+				<Text style={styles.label}>Estado:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Digite o estado"
+					value={location.state}
+					onChangeText={text => handleLocationChange('state', text)}
+				/>
+				<Text style={styles.label}>Cidade:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Digite a cidade"
+					value={location.city}
+					onChangeText={text => handleLocationChange('city', text)}
+				/>
+				<Text style={styles.label}>Complemento:</Text>
+				<TextInput
+					style={styles.input}
+					placeholder="Digite o complemento"
+					value={location.complement}
+					onChangeText={text =>
+						handleLocationChange('complement', text)
+					}
+				/>
+
+				<Text style={styles.label}>Profissionais Envolvidos:</Text>
+				<TouchableOpacity
+					style={styles.button}
+					onPress={() => setDropdownOpen(!dropdownOpen)}
+				>
+					<Text style={styles.buttonText}>
+						Selecionar profissionais
+					</Text>
+				</TouchableOpacity>
+				{dropdownOpen && (
+					<View style={{ marginBottom: 12 }}>
+						{users.map(user => (
+							<TouchableOpacity
+								key={user._id}
+								style={{
+									flexDirection: 'row',
+									alignItems: 'center',
+									marginBottom: 4,
+								}}
+								onPress={() => toggleUser(user._id)}
+							>
+								<Text style={{ marginRight: 8 }}>
+									{envolved.includes(user._id) ? '☑' : '☐'}
+								</Text>
+								<Text>
+									{user.name} ({user.role})
+								</Text>
+							</TouchableOpacity>
+						))}
+					</View>
 				)}
-			</TouchableOpacity>
+				{envolved.length > 0 && (
+					<View style={{ marginBottom: 12 }}>
+						<Text style={{ fontWeight: 'bold' }}>
+							Profissionais selecionados:
+						</Text>
+						{users
+							.filter(u => envolved.includes(u._id))
+							.map(u => (
+								<Text key={u._id}>
+									{u.name} ({u.role})
+								</Text>
+							))}
+					</View>
+				)}
+
+				<TouchableOpacity
+					style={styles.buttonPrimary}
+					onPress={handleSubmit}
+					disabled={loading}
+				>
+					{loading ? (
+						<ActivityIndicator color="#fff" />
+					) : (
+						<Text style={styles.buttonText2}>Cadastrar</Text>
+					)}
+				</TouchableOpacity>
+			</View>
 		</ScrollView>
 	);
 }
