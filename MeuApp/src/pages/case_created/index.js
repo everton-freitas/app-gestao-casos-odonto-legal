@@ -211,7 +211,10 @@ export default function CaseCreated() {
 			);
 
 			Dialog.hide();
-			if (caseResponse.status === 201) {
+			if (
+				(caseResponse.status === 201 || caseResponse.status === 200) &&
+				caseResponse.data
+			) {
 				Dialog.show({
 					type: ALERT_TYPE.SUCCESS,
 					title: 'Caso cadastrado!',
