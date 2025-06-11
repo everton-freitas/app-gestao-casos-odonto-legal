@@ -11,6 +11,8 @@ import { COLORS } from '../../Colors';
 import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 
 export default function Casos() {
+	const navigation = useNavigation();
+
 	const [cases, setCases] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [page, setPage] = useState(1);
