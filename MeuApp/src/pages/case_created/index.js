@@ -21,7 +21,7 @@ export default function CaseCreated() {
 	const [inquiryNumber, setInquiryNumber] = useState('');
 	const [requestingInstitution, setRequestingInstitution] = useState('');
 	const [requestingAuthority, setRequestingAuthority] = useState('');
-	const [caseType, setCaseType] = useState('');
+	const [caseType, setCaseType] = useState('ACIDENTE');
 	const [observations, setObservations] = useState('');
 	const [questions, setQuestions] = useState([{ question: 'N/A' }]);
 	const [nic, setNic] = useState(['']);
@@ -54,13 +54,14 @@ export default function CaseCreated() {
 		{ label: 'EXAME DE VIOLÊNCIA', value: 'EXAME DE VIOLÊNCIA' },
 		{ label: 'ANÁLISE MULTIVÍTIMA', value: 'ANÁLISE MULTIVÍTIMA' },
 		{ label: 'OUTROS', value: 'OUTROS' },
+		{ label: 'ACIDENTE', value: 'ACIDENTE' },
 	]);
 
 	const limparCampos = () => {
 		setNic(['']);
 		setTitle('');
 		setInquiryNumber('');
-		setCaseType('');
+		setCaseType('ACIDENTE');
 		setObservations('');
 		setLocation({
 			street: '',
@@ -104,7 +105,7 @@ export default function CaseCreated() {
 	const handleLocationChange = (field, value) => {
 		setLocation(prev => ({
 			...prev,
-			[field]: field === 'houseNumber' ? value.replace(/\D/g, '') : value,
+			[field]: field === 'houseNumber' ? Number(value) || 0 : value,
 		}));
 	};
 
@@ -177,6 +178,26 @@ export default function CaseCreated() {
 	}, [location.zipCode]);
 
 	const handleSubmit = async () => {
+		setLoading(true);
+
+		// Validação dos campos obrigatórios
+		if (
+			!title ||
+			!inquiryNumber ||
+			!requestingInstitution ||
+			!requestingAuthority ||
+			!caseType
+		) {
+			Dialog.show({
+				type: ALERT_TYPE.WARNING,
+				title: 'Campos obrigatórios',
+				textBody: 'Preencha todos os campos obrigatórios.',
+				button: 'OK',
+			});
+			setLoading(false);
+			return;
+		}
+
 		const token = await AsyncStorage.getItem('token');
 		const data = {
 			nic,
@@ -186,7 +207,10 @@ export default function CaseCreated() {
 			requestingAuthority,
 			caseType,
 			observations,
-			location,
+			location: {
+				...location,
+				houseNumber: Number(location.houseNumber) || 0,
+			},
 			questions,
 			professional: envolved,
 		};
@@ -197,7 +221,9 @@ export default function CaseCreated() {
 			textBody: 'Por favor, aguarde enquanto o caso é cadastrado.',
 			autoClose: false,
 		});
-		setLoading(true);
+
+		await new Promise(resolve => setTimeout(resolve, 1500)); // delay opcional
+
 		try {
 			const caseResponse = await axios.post(
 				'https://sistema-odonto-legal.onrender.com/api/cases/create',
@@ -372,7 +398,7 @@ export default function CaseCreated() {
 				<TextInput
 					style={styles.input}
 					placeholder="Digite o número da casa"
-					value={location.houseNumber}
+					value={location.houseNumber.toString()}
 					keyboardType="numeric"
 					onChangeText={text =>
 						handleLocationChange('houseNumber', text)
