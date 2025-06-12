@@ -71,7 +71,7 @@ export default function Routes() {
 							),
 						}}
 					/>
-				
+
 					<Stack.Screen
 						name="ImprimirRelatorio"
 						component={ImprimirRelatorio}
@@ -81,7 +81,7 @@ export default function Routes() {
 							),
 						}}
 					/>
-					
+
 					<Stack.Screen
 						name="CaseDetails"
 						component={CaseDetails}
@@ -91,13 +91,11 @@ export default function Routes() {
 							),
 						}}
 					/>
-						<Stack.Screen
+					<Stack.Screen
 						name="CaseCreated"
 						component={CaseCreated}
 						options={{
-							header: () => (
-								<CustomHeader title="Criar caso" />
-							),
+							header: () => <CustomHeader title="Criar caso" />,
 						}}
 					/>
 					<Stack.Screen
@@ -118,25 +116,23 @@ export default function Routes() {
 							),
 						}}
 					/>
-					<Stack.Screen 
+					<Stack.Screen
 						name="EvidenceRegistrationPage"
 						component={EvidenceRegistrationPage}
 						options={{
 							header: () => {
-								<CustomHeader title="Cadastrar evidencia" />
-							}
+								<CustomHeader title="Cadastrar evidencia" />;
+							},
 						}}
-
 					/>
-					<Stack.Screen 
+					<Stack.Screen
 						name="Vitimas"
 						component={Vitimas}
 						options={{
 							header: () => {
-								<CustomHeader title="Vitimas" />
-							}
+								<CustomHeader title="Vitimas" />;
+							},
 						}}
-
 					/>
 					<Stack.Screen
 						name="CaseReport"
