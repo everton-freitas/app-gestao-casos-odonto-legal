@@ -1,4 +1,4 @@
-// pages/ColetorEvidencia.js
+
 import React, { useState, useRef } from 'react';
 import {
 	View,
@@ -22,7 +22,6 @@ import { ALERT_TYPE, Dialog, Toast } from 'react-native-alert-notification';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// Você pode mover os estilos para um arquivo separado (styles.js) se preferir
 const styles = StyleSheet.create({
 	container: {
 		flexGrow: 1,
