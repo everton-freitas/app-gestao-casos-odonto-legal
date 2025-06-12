@@ -21,7 +21,7 @@ export default function CaseCreated() {
 	const [inquiryNumber, setInquiryNumber] = useState('');
 	const [requestingInstitution, setRequestingInstitution] = useState('');
 	const [requestingAuthority, setRequestingAuthority] = useState('');
-	const [caseType, setCaseType] = useState('ACIDENTE');
+	const [caseType, setCaseType] = useState('IDENTIFICAÇÃO');
 	const [observations, setObservations] = useState('');
 	const [questions, setQuestions] = useState([{ question: 'N/A' }]);
 	const [nic, setNic] = useState(['']);
@@ -54,14 +54,14 @@ export default function CaseCreated() {
 		{ label: 'EXAME DE VIOLÊNCIA', value: 'EXAME DE VIOLÊNCIA' },
 		{ label: 'ANÁLISE MULTIVÍTIMA', value: 'ANÁLISE MULTIVÍTIMA' },
 		{ label: 'OUTROS', value: 'OUTROS' },
-		{ label: 'ACIDENTE', value: 'ACIDENTE' },
+		
 	]);
 
 	const limparCampos = () => {
 		setNic(['']);
 		setTitle('');
 		setInquiryNumber('');
-		setCaseType('ACIDENTE');
+		setCaseType('IDENTIFICAÇÃO');
 		setObservations('');
 		setLocation({
 			street: '',
@@ -215,15 +215,6 @@ export default function CaseCreated() {
 			professional: envolved,
 		};
 
-		Dialog.show({
-			type: ALERT_TYPE.INFO,
-			title: 'Cadastrando...',
-			textBody: 'Por favor, aguarde enquanto o caso é cadastrado.',
-			autoClose: false,
-		});
-
-		await new Promise(resolve => setTimeout(resolve, 1500)); // delay opcional
-
 		try {
 			const caseResponse = await axios.post(
 				'https://sistema-odonto-legal.onrender.com/api/cases/create',
@@ -231,12 +222,12 @@ export default function CaseCreated() {
 				{
 					headers: {
 						Authorization: `Bearer ${token}`,
-						'Content-Type': 'application/json',
+						
 					},
 				}
 			);
 
-			Dialog.hide();
+
 			if (
 				(caseResponse.status === 201 || caseResponse.status === 200) &&
 				caseResponse.data
@@ -271,6 +262,7 @@ export default function CaseCreated() {
 				});
 			}
 		} catch (err) {
+			console.log('erro na criacao de caso', err.response.data)
 			Dialog.hide();
 			Dialog.show({
 				type: ALERT_TYPE.DANGER,
