@@ -18,6 +18,7 @@ import VictimDetail from './pages/victim_details';
 import GenerateReportScreen from './pages/imprimir_laudo';
 import ImprimirRelatorio from './pages/imprimir_relatorio';
 import CaseCreated from './pages/case_created';
+import EvidenceRegistrationPage from './pages/evidence_registration_page';
 
 // Somente importa se não estiver na web
 const AlertNotificationRoot =
@@ -70,6 +71,7 @@ export default function Routes() {
 							),
 						}}
 					/>
+				
 					<Stack.Screen
 						name="ImprimirRelatorio"
 						component={ImprimirRelatorio}
@@ -115,6 +117,16 @@ export default function Routes() {
 								<CustomHeader title="Laudo da Evidência" />
 							),
 						}}
+					/>
+					<Stack.Screen 
+						name="EvidenceRegistrationPage"
+						component={EvidenceRegistrationPage}
+						options={{
+							header: () => {
+								<CustomHeader title="Cadastrar evidencia" />
+							}
+						}}
+
 					/>
 					<Stack.Screen 
 						name="Vitimas"

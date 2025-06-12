@@ -32,7 +32,7 @@ export default function CaseDetails() {
 	const [loading, setLoading] = useState(true);
 
 	const addEvidence = protocol => {
-		navigation.navigate('AddEvidence', { protocol });
+		navigation.navigate('EvidenceRegistrationPage', { protocol });
 	};
 
 	const handleGenerateReport = evidence => {

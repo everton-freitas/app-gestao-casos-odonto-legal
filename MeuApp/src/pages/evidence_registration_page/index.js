@@ -17,6 +17,7 @@ import * as Location from 'expo-location';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import styles from './styles';
 
+
 export default function EvidenceRegistrationPage() {
 	const navigation = useNavigation();
 	const route = useRoute();
@@ -66,6 +67,7 @@ export default function EvidenceRegistrationPage() {
 	};
 
 	const handleImagePick = async () => {
+		console.log(ImagePicker);
 		const permissionResult =
 			await ImagePicker.requestMediaLibraryPermissionsAsync();
 		if (!permissionResult.granted) {
@@ -79,7 +81,7 @@ export default function EvidenceRegistrationPage() {
 		}
 		const pickerResult = await ImagePicker.launchImageLibraryAsync({
 			mediaTypes: ImagePicker.MediaTypeOptions.Images,
-			quality: 0.7,
+			 quality: 0.2, 
 			base64: true,
 		});
 		if (
@@ -97,6 +99,51 @@ export default function EvidenceRegistrationPage() {
 				}
 			);
 			setPhoto(`data:image/jpeg;base64,${manipResult.base64}`);
+		}
+	};
+	const handleCameraCapture = async () => {
+		console.log(ImagePicker);
+		try {
+			const { status } = await ImagePicker.requestCameraPermissionsAsync();
+			if (status !== 'granted') {
+				Dialog.show({
+					type: ALERT_TYPE.DANGER,
+					title: 'Permissão negada',
+					textBody: 'Você precisa permitir o uso da câmera para tirar fotos.',
+					button: 'OK',
+				});
+				return;
+			}
+			const result = await ImagePicker.launchCameraAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.Images,
+				allowsEditing: true,
+				quality: 0.4,
+				base64: true,
+			});
+
+			console.log('Resultado da câmera:', result);
+
+			if (!result.canceled && result.assets?.length > 0) {
+				const manipResult = await ImageManipulator.manipulateAsync(
+					result.assets[0].uri,
+					[{ resize: { width: 800 } }],
+					{
+						compress: 0.7,
+						format: ImageManipulator.SaveFormat.JPEG,
+						base64: true,
+					}
+				);
+
+				setPhoto(`data:image/jpeg;base64,${manipResult.base64}`);
+			}
+		} catch (error) {
+			console.error('Erro ao capturar foto:', error);
+			Dialog.show({
+				type: ALERT_TYPE.DANGER,
+				title: 'Erro ao capturar foto',
+				textBody: 'Algo deu errado ao tentar tirar a foto. Tente novamente.',
+				button: 'OK',
+			});
 		}
 	};
 
@@ -218,12 +265,17 @@ export default function EvidenceRegistrationPage() {
 				<Text style={styles.label}>
 					Imagens (Radiografias/Fotografias Intraorais):*
 				</Text>
-				<TouchableOpacity
-					style={styles.button}
-					onPress={handleImagePick}
-				>
-					<Text style={styles.buttonText1}>Selecionar Imagem</Text>
-				</TouchableOpacity>
+				<View style={{ flexDirection: 'row', gap: 10, marginBottom: 10 }}>
+					<TouchableOpacity style={styles.button} onPress={handleImagePick}>
+						<Text style={styles.buttonText1}>Galeria</Text>
+					</TouchableOpacity>
+
+					<TouchableOpacity style={styles.button} onPress={handleCameraCapture}>
+						<Text style={styles.buttonText1}>Câmera</Text>
+					</TouchableOpacity>
+				</View>
+
+
 				{photo && (
 					<Image
 						source={{ uri: photo }}
@@ -242,7 +294,7 @@ export default function EvidenceRegistrationPage() {
 					items={conditionItems}
 					setOpen={setOpenCondition}
 					setValue={setCondition}
-					setItems={() => {}}
+					setItems={() => { }}
 					placeholder="Selecione a condição"
 					style={styles.input}
 					containerStyle={{ marginBottom: openCondition ? 120 : 8 }}
@@ -288,7 +340,7 @@ export default function EvidenceRegistrationPage() {
 					items={categoryItems}
 					setOpen={setOpenCategory}
 					setValue={setCategory}
-					setItems={() => {}}
+					setItems={() => { }}
 					placeholder="Selecione a categoria"
 					style={styles.input}
 					containerStyle={{ marginBottom: 8 }}
