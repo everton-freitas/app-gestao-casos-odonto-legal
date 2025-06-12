@@ -15,6 +15,7 @@ import { ALERT_TYPE, Dialog } from 'react-native-alert-notification';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import styles from './styles';
+import { Alert } from 'react-native';
 
 export default function LaudoForm() {
 	const navigation = useNavigation();
@@ -25,6 +26,7 @@ export default function LaudoForm() {
 	const [technicalAnalysis, setTechnicalAnalysis] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [loadingAI, setLoadingAI] = useState(false);
+
 	const handleGenerateConclusion = async () => {
 		setLoadingAI(true);
 		const token = await AsyncStorage.getItem('token');
@@ -47,6 +49,7 @@ export default function LaudoForm() {
 				title: 'Conclusão gerada!',
 				textBody: 'A conclusão foi preenchida com a sugestão da IA.',
 				autoClose: 2000,
+				button: 'OK',
 			});
 		} catch (error) {
 			Dialog.show({
@@ -62,16 +65,17 @@ export default function LaudoForm() {
 	};
 
 	const handleSubmit = async () => {
-		Dialog.show({
-			type: ALERT_TYPE.WARNING,
-			title: 'Confirmar geração do laudo?',
-			textBody:
-				'Você não poderá editar ou remover o laudo depois de salvo!',
-			button: 'Cancelar',
-			buttons: [
+		Alert.alert(
+			'Confirmar geração do laudo?',
+			'Você não poderá editar ou remover o laudo depois de salvo!',
+			[
 				{
-					text: 'Sim, gerar laudo!',
-					backgroundColor: '#1E88E5',
+					text: 'Cancelar',
+					style: 'cancel',
+					onPress: () => console.log('Cancelado!'),
+				},
+				{
+					text: 'Sim!',
 					onPress: async () => {
 						setLoading(true);
 						const token = await AsyncStorage.getItem('token');
@@ -93,29 +97,21 @@ export default function LaudoForm() {
 									},
 								}
 							);
-							Dialog.show({
-								type: ALERT_TYPE.SUCCESS,
-								title: 'Laudo salvo com sucesso!',
-								autoClose: 1500,
-							});
-							setTimeout(() => {
-								navigation.replace('CaseDetails', { protocol });
-							}, 1500);
+							navigation.replace('CaseDetails', { protocol });
 						} catch (error) {
-							Dialog.show({
-								type: ALERT_TYPE.DANGER,
-								title: 'Erro ao salvar o laudo',
-								textBody:
-									error.response?.data?.message ||
+							Alert.alert(
+								'Erro ao salvar o laudo',
+								error.response?.data?.message ||
 									'Tente novamente mais tarde.',
-								button: 'OK',
-							});
+								[{ text: 'OK' }]
+							);
 						}
 						setLoading(false);
 					},
 				},
 			],
-		});
+			{ cancelable: false }
+		);
 	};
 
 	return (
