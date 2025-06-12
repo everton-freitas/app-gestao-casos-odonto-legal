@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import Routes from './Routes';
+import Routes from './routes';
 import {
 	useFonts,
 	Roboto_400Regular,
@@ -10,17 +10,16 @@ import { ActivityIndicator } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 
-SplashScreen.preventAutoHideAsync(); // Impede que a splash suma automaticamente
+SplashScreen.preventAutoHideAsync(); 
 
 export default function App() {
 
 
     useEffect(() => {
     async function prepare() {
-      // Simula carregamento de dados
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      await SplashScreen.hideAsync(); // Esconde a splash depois de carregar
+      await SplashScreen.hideAsync(); 
     }
 
     prepare();
