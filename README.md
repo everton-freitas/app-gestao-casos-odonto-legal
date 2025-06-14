@@ -90,13 +90,26 @@ Siga os passos abaixo para clonar o repositório e iniciar a aplicação localme
 
 ```bash
 # 1. Clone o repositório
-git clone https://github.com/fernandesmelo/projeto-integrador-terceiro-periodo.git
+git clone https://github.com/everton-freitas/app-gestao-casos-odonto-legal.git
 
 # 2. Acesse a pasta do projeto
-cd projeto-integrador
+cd app-gestao-casos-odonto-legal
 
-# 3. Instale as dependências
+# 3. Instale o Expo CLI 
+npm install -g expo-cli
+
+# 4. Instale as dependências
 npm install
 
 # 4. Rode o projeto
-npm run dev
+npx expo start
+```
+
+#### Execute no seu celular
+* Baixe o app Expo Go na Play Store (Android) ou App Store (iOS).
+* Abra o app Expo Go no seu celular.
+* Escaneie o QR Code que aparece no terminal ou no navegador após rodar o comando acima.
+  
+## ⚙️ Executando os Testes
+Próximos passos...
+
